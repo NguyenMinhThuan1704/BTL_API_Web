@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logoCPT.png">
+    <link rel="stylesheet" href="../assets/css/style_mainQT.css">
+    <!-- <script src="../js/hide_menu.js"></script> -->
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/click.js"></script>
+    <script src="../assets/js/angular.min.js"></script>
+    <script src="../assets/js/globalAD.js"></script>
+    <script src="../assets/js/taikhoan.js"></script>
+    <title>Quản lý cửa hàng bán đèn trang trí</title>
+</head>
+
+<body ng-app="AppAdmin"  ng-controller="TaiKhoanController">
+    <section class="header">
+        <a href="javascript:void(0);" class="icon" onclick="openBTN()">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="box-login" id="box-t">
+            Xin chào, <span id="ten_nv">Admin</span> <i class="fas fa-sort-down"></i>
+            <div class="box-login-bottom" id="box-b">
+                <button onclick="TTTaiKhoan()"><i class="fas fa-user-alt"></i> Tài khoản</button>
+                <button onclick="LogOut();"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <div class="row">
+            <div class="col-1 col-s-12 category">
+                <button onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</button>
+                <button onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
+                <button onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</button>
+                <button onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</button>
+                <button onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</button>
+                <button onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</button>
+                <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
+                <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
+                <button class="active" onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
+                <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button>
+            </div>
+            <!-- <div class="bx-left" id="button-left">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeBTN()"><i
+                        class="far fa-window-close"></i></a>
+                <ul>
+                    <li onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</li>
+                    <li onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</li>
+                    <li onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</li>
+                    <li onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</li>
+                    <li onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</li>
+                    <li onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</li>
+                    <li onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</li>
+                    <li onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</li>
+                    <li onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</li>
+                    <li onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</li>
+                </ul>
+            </div> -->
+            <div class="col-11 col-s-12 content">
+                <div class="col-4 col-s-12 content">
+                    <div class="tabcontent">
+                        <div class="title">
+                            <i class="fas fa-barcode"></i> Nhập thông tin tài khoản
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <form>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Mã tài khoản:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="MaTK"
+                                        disabled value="Mã tài khoản tự động sinh!" style="background-color: #cecaca;">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Loại tài khoản:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <select name="loaisp" id="TenLoaiTaiKhoan" ng-model="selectedTK">
+                                        <option value="">--Chọn loại tài khoản--</option>
+                                        <option ng-repeat="ltk in listLTK" value="{{ltk.maLoaiTK}}">{{ltk.maLoaiTK}} - {{ltk.tenLoaiTK}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Tên tài khoản:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="TenTaiKhoan" placeholder="Nhập tên tài khoản...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Mật khẩu:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="MatKhau" placeholder="Nhập giá của tài khoản...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Email:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="Email" placeholder="Nhập giá sau khi giảm của tài khoản...">
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                        <button id="themSanPhamButton" class="btn-form" style="background-color: rgba(44, 140, 15, 0.8);"
+                            onclick="ThemTaiKhoan()">Thêm tài khoản</button>
+                        <button class="btn-form" style="background-color: rgba(227, 32, 21, 0.8);"
+                            onclick="NhapMoi()">Nhập mới</button>
+                        <button class="btn-form" style="background-color: rgba(14, 87, 224, 0.8);" id="btnUpdate"
+                            onclick="CapNhat()">Cập nhật thông tin</button>
+                    </div>
+                </div>
+                <div class="col-8 col-s-12 content">
+                    <div class="tabcontent">
+                        <div class="title">
+                            <i class="fas fa-barcode"></i> Danh sách tài khoản
+                            <button onclick="XoaChon()" style="margin-right: 3px;"><i class="far fa-trash-alt"></i> Xóa
+                                chọn</button>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 col-s-12 padding-box">
+                                <input type="text" id="search-taikhoan" ng-model="tentk" placeholder="Nhập tên tài khoản...">
+                            </div>
+                            <div class="col-6 col-s-12 padding-box">
+                                <select name="loaitk" id="TenLoaiTaiKhoan1" ng-model="selectedTK1">
+                                    <option value="">--Chọn loại tài khoản--</option>
+                                    <option ng-repeat="ltk in listLTK" value="{{ltk.maLoaiTK}}">{{ltk.maLoaiTK}} - {{ltk.tenLoaiTK}}</option>
+                                </select>
+                            </div>
+                            <div class="col-2 col-s-12 padding-box">
+                                <button id="btnSearch"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-s-12 padding-box">
+                                <table class="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding-top: 10px;"><input type="checkbox" ng-click="CheckAll()" ng-model="selectAll"></th>
+                                            <th>Mã tài khoản</th>
+                                            <th>Tên loại tài khoản</th>
+                                            <th>Tên tài khoản</th>
+                                            <th>Mật khẩu</th>
+                                            <th>Email</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <tr ng-repeat="tk in listTK">
+                                            <td><input type="checkbox" ng-model="tk.selected"></td>
+                                            <td>{{tk.maTaiKhoan}}</td>
+                                            <td>{{tk.tenLoaiTK}}</td>
+                                            <td>{{tk.tenTaiKhoan}}</td>
+                                            <td>{{tk.matKhau}}</td>
+                                            <td>{{tk.email}}</td>
+                                            <td style="text-align: center;">
+                                                <i class="fas fa-edit" title="Sửa" data-matk="{{tk.maTaiKhoan}}" data-maloaitk="{{tk.loaiTaiKhoan}}" data-tentk="{{tk.tenTaiKhoan}}" data-matkhau="{{tk.matKhau}}" data-email="{{tk.email}}" onclick="SuaTaiKhoan(this)"></i>
+                                                <i class="fas fa-trash-alt" title="Xóa" data-matk="{{tk.maTaiKhoan}}"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 col-s-12 padding-box">
+                                <div class="box-sum" style="display: flex;">
+                                    <div class="box-right">
+                                        <button><i class="fas fa-angle-left"></i></button>
+                                        <button ng-click="changePage(1)">1</button>
+                                        <button ng-click="changePage(2)">2</button>
+                                        <button ng-click="changePage(3)">3</button>
+                                        <button ng-click="changePage(4)">4</button>
+                                        <button ng-click="changePage(5)">5</button>
+                                        <button><i class="fas fa-angle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

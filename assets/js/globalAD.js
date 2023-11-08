@@ -1,0 +1,1 @@
+var current_url_ad = "https://localhost:44313";

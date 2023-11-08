@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/Project_2/img/logoCPT.png">
+    <link rel="stylesheet" href="../assets/css/style_mainQT.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/click.js"></script>
+    <script src="../assets/js/angular.min.js"></script>
+    <script src="../assets/js/globalAD.js"></script>
+    <script src="../assets/js/tintuc.js"></script>
+    <title>Quản lý cửa hàng bán đèn trang trí</title>
+</head>
+
+<body ng-app="AppAdmin"  ng-controller="TinTucController">
+    <section class="header">
+        <a href="javascript:void(0);" class="icon" onclick="openBTN()">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="box-login" id="box-t">
+            Xin chào, <span id="ten_nv">Admin</span> <i class="fas fa-sort-down"></i>
+            <div class="box-login-bottom" id="box-b">
+                <button onclick="TTTaiKhoan()"><i class="fas fa-user-alt"></i> Tài khoản</button>
+                <button onclick="LogOut();"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <div class="row">
+            <div class="col-1 col-s-12 category">
+                <button onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</button>
+                <button onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
+                <button onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</button>
+                <button onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</button>
+                <button onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</button>
+                <button onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</button>
+                <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
+                <button class="active" onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
+                <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
+                <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button>
+            </div>
+            <!-- <div class="bx-left" id="button-left">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeBTN()"><i
+                        class="far fa-window-close"></i></a>
+                <ul>
+                    <li onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</li>
+                    <li onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</li>
+                    <li onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</li>
+                    <li onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</li>
+                    <li onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</li>
+                    <li onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</li>
+                    <li onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</li>
+                    <li onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</li>
+                    <li onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</li>
+                    <li onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</li>
+                </ul>
+            </div> -->
+            <div class="col-11 col-s-12 content">
+                <div class="col-5 col-s-12 content">
+                    <div class="tabcontent">
+                        <div class="title">
+                            <i class="fas fa-newspaper"></i> Nhập thông tin tin tức
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <form>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Mã tin tức:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="MaTinTuc"
+                                    disabled value="Mã tin tức tự động sinh!" style="background-color: #cecaca;">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Tiêu đề:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="TieuDe" placeholder="Nhập tiêu đề tin tức...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Ảnh đại diện:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="AnhDaiDien" placeholder="Nhập đường dẫn tin tức...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Mô tả:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="MoTa" placeholder="Nhập mô tả tin tức...">
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <label for="txtright">Ngày tạo:</label>
+                                </div>
+                                <div class="col-12 col-s-12 padding-box">
+                                    <input type="text" id="NgayTao"
+                                    disabled value="Ngày tạo là thời điểm thêm tin tưc!" style="background-color: #cecaca;">
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                        <button class="btn-form" style="background-color: rgba(44, 140, 15, 0.8);"
+                            onclick="ThemTinTuc()">Thêm tin tức</button>
+                        <button class="btn-form" style="background-color: rgba(227, 32, 21, 0.8);"
+                            onclick="NhapMoi()">Nhập mới</button>
+                        <button class="btn-form" style="background-color: rgba(14, 87, 224, 0.8);" id="btnUpdate"
+                            onclick="CapNhat()">Cập nhật thông tin</button>
+                    </div>
+                </div>
+                <div class="col-7 col-s-12 content">
+                    <div class="tabcontent">
+                        <div class="title">
+                            <i class="fas fa-newspaper"></i> Danh sách tin tức
+                            <button onclick="XoaChon()" style="margin-right: 3px;"><i class="far fa-trash-alt"></i> Xóa
+                                chọn</button>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-s-12 padding-box">
+                                <input type="text" id="search-tintuc" ng-model="tieudett" placeholder="Nhập tiêu đề tin tức...">
+                            </div>
+                            <div class="col-5 col-s-12 padding-box">
+                                <input type="text" id="search-mota" ng-model="motatt" placeholder="Nhập mô tả tin tức...">
+                            </div>
+                            <div class="col-2 col-s-12 padding-box">
+                                <button id="btnSearch"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-s-12 padding-box">
+                                <table class="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding-top: 10px;"><input type="checkbox" ng-click="CheckAll()" ng-model="selectAll"></th>
+                                            <th>Mã tin tức</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Ảnh đại diện</th>
+                                            <th>Mô tả</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <tr ng-repeat="tt in listTT">
+                                            <td><input type="checkbox" ng-model="tt.selected"></td>
+                                            <td>{{tt.maTinTuc}}</td>
+                                            <td>{{tt.tieuDe}}</td>
+                                            <td>{{tt.anhDaiDien}}</td>
+                                            <td>{{tt.moTa}}</td>
+                                            <td>{{tt.ngayTao}}</td>
+                                            <td style="text-align: center;">
+                                                <i class="fas fa-edit" title="Sửa" data-matt="{{tt.maTinTuc}}" onclick="SuaTT(this)"></i>
+                                                <i class="fas fa-trash-alt" title="Xóa" data-matt="{{tt.maTinTuc}}"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 col-s-12 padding-box">
+                                <div class="box-sum" style="display: flex;">
+                                    <div class="box-right">
+                                        <button><i class="fas fa-angle-left"></i></button>
+                                        <button ng-click="changePage(1)">1</button>
+                                        <button ng-click="changePage(2)">2</button>
+                                        <button ng-click="changePage(3)">3</button>
+                                        <button ng-click="changePage(4)">4</button>
+                                        <button><i class="fas fa-angle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
