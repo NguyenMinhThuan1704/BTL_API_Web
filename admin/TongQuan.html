@@ -9,16 +9,19 @@
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/click.js"></script>
+    <script src="../assets/js/angular.min.js"></script>
+    <script src="../assets/js/globalAD.js"></script>
+    <script src="../assets/js/tongquan.js"></script>
     <title>Quản lý cửa hàng bán đèn trang trí</title>
 </head>
 
-<body>
+<body ng-app="AppAdmin"  ng-controller="TongQuanCtrl">
     <section class="header">
         <a href="javascript:void(0);" class="icon" onclick="openBTN()">
             <i class="fas fa-bars"></i>
         </a>
         <div class="box-login" id="box-t">
-            Xin chào, <span id="ten_nv">Admin</span> <i class="fas fa-sort-down"></i>
+            Xin chào, <span id="ten_nv">{{tk.tenTaiKhoan}}</span> <i class="fas fa-sort-down"></i>
             <div class="box-login-bottom" id="box-b">
                 <button onclick="TTTaiKhoan()"><i class="fas fa-user-alt"></i> Tài khoản</button>
                 <button onclick="LogOut();"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>

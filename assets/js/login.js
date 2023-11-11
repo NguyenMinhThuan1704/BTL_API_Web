@@ -110,26 +110,26 @@ app.controller('LoginCtrl', function ($scope, $http) {
 
                 switch ($scope.dataUser.loaitaikhoan) {
                     case 1:
-                        if ($scope.dataUser.mataikhoan) {
-                            // window.location.href = "/index_main.html";
-                            window.location.href = "/admin/TongQuan.html";
-                        } else {
-                            console.log('Không có ID để chuyển hướng.');
-                        }
-                        break;
+                      if ($scope.dataUser.mataikhoan) {
+                          window.location.href = `/admin/TongQuan.html?id=${$scope.dataUser.mataikhoan}`;
+                          // window.location.href = "/admin/TongQuan.html";
+                      } else {
+                          console.log('Không có ID để chuyển hướng.');
+                      }
+                      break;
                     case 2:
-                        if($scope.dataUser.mataikhoan){
-                            // window.location.href = `/index.html?id=${$scope.dataUser.mataikhoan}`;
-                            window.location.href = "/admin/TongQuanNV.html";
-                        }
-                        else {
-                            console.log("khong co id");
-                        }
-                        break;
+                      if($scope.dataUser.mataikhoan){
+                          window.location.href = `/admin/TongQuanNV.html?id=${$scope.dataUser.mataikhoan}`;
+                          // window.location.href = "/admin/TongQuanNV.html";
+                      }
+                      else {
+                          console.log("khong co id");
+                      }
+                      break;
                     case 3:
                       if($scope.dataUser.mataikhoan){
-                          // window.location.href = `/index.html?id=${$scope.dataUser.mataikhoan}`;
-                          window.location.href = "/index_main.html";
+                          window.location.href = `/index_main.html?id=${$scope.dataUser.mataikhoan}`;
+                          // window.location.href = "/index_main.html";
                       }
                       else {
                           console.log("khong co id");

@@ -13,7 +13,6 @@ app.controller("ChiTietCtrl", function ($scope, $http) {
             // console.log($scope.maLoaiSanPham);
 			// makeScript('js/main.js')
         });
-        
     };  
     $scope.LoadSanPhambyID()
 

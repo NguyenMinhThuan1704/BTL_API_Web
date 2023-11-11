@@ -199,4 +199,3 @@ function CapNhat() {
         console.error('Lỗi kết nối đến máy chủ: ' + error);
     });
 }
-

@@ -62,10 +62,7 @@ function ThemKhachHang() {
         alert("Tên khách hàng không được để trống! Vui lòng nhập lại!");
         return false;
     }
-    else if (TenKH == null || TenKH == "") {
-        alert("Số điện thoại khách hàng không được để trống! Vui lòng nhập lại!");
-        return false;
-    } else if (!SDT.match(number) || SDT.length != 10) {
+    else if (!SDT.match(number) || SDT.length != 10) {
         alert("Số điện thoại khách hàng phải là kiểu số và có độ dài là 10 ký tự! Vui lòng nhập lại!");
         return false;
     }

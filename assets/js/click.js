@@ -24,7 +24,7 @@ function TTTaiKhoan() {
 
 function LogOut() {
     localStorage.setItem('user', null);
-    window.location.href = "../admin/login.html";
+    window.location.href = "../login.html";
 }
 
 function TongQuan() {

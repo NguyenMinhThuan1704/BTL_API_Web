@@ -33,7 +33,7 @@
                         <div class="search_item">
                             <div class="search-text">
                                 <div class="search-text-wrap">
-                                    <input type="text" class="pass" placeholder="Bạn cần tìm gì...">
+                                    <input type="text" class="pass" placeholder="Bạn cần tìm gì..." style="color: #fff !important;">
                                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                                 </div>
                             </div>
@@ -52,15 +52,16 @@
                             <p>Hotline - Zalo</p>
                         </div>
                         <div class="cart">
-                            <a href="" class="cart-link">
+                            <a href="./giohang.html" class="cart-link">
                                 <i class="fa-solid fa-cart-shopping cart-logo"></i>
                                 <span class="cart-notice">0</span>
                             </a>
                         </div>
                         <div class="user">
-                            <a href="" class="user-link">
+                            <a href="./login.html" class="user-link">
                                 <i class="fa-solid fa-user user-logo"></i>
                             </a>
+                            <span>{{tk.tenTaiKhoan}}</span>
                         </div>
                     </div>
 
@@ -90,14 +91,14 @@
                             <a href="">Trang chủ</a>
                         </li>
                         <li class="header__nav-item">
-                            <a href="">Giới thiệu</a>
+                            <a href="./gioithieu.html">Giới thiệu</a>
                         </li>
                         <li class="header__nav-item menu-item">
                             <a href="">Đèn trang trí ngoại thất</a>
                             <i class="fa-solid fa-angle-down"></i>
                             <ul class="subnav">
                                 <li class="subnav-item">
-                                    <a href="">Đèn Nội Thất</a>
+                                    <a href="./dennoithat.html">Đèn Nội Thất</a>
                                    <i class="fa-solid fa-angle-right"></i>
                                    <ul class="subnav1">
                                         <li>
@@ -402,19 +403,19 @@
                             </ul>
                         </li>
                         <li class="header__nav-item">
-                            <a href="">Khuyến mãi</a>
+                            <a href="./khuyenmai.html">Khuyến mãi</a>
                         </li>
                         <li class="header__nav-item">
-                            <a href="">Tin tức</a>
+                            <a href="./tintuc.html">Tin tức</a>
                         </li>
                         <li class="header__nav-item">
-                            <a href="">Dự án thực hiện</a>
+                            <a href="./duanthuchien.html">Dự án thực hiện</a>
                         </li>
                         <li class="header__nav-item">
                             <a href="">Catalogue</a>
                         </li>
                         <li class="header__nav-item">
-                            <a href="">Liên hệ  </a>
+                            <a href="./lienhe.html">Liên hệ  </a>
                         </li>
                     </ul>
                 </nav>
@@ -756,7 +757,6 @@
                         </li>
                     </ul>
                 </nav> -->
-                
             </div>
         </div>
 
@@ -1257,7 +1257,9 @@
                             </div>
     
                             <div class="item-title-add" >
-                                <a href="./index_product.html?id={{x.maSanPham}}" class="item-title-link">Mua ngay</a>
+                                <!-- <a href="./index_product.html?id={{x.maSanPham}}" class="item-title-link">Mua ngay</a> -->
+                                <a ng-click="addToCart(x)" class="item-title-link">Mua ngay</a>
+
                             </div>
                         </div>
 

@@ -28,6 +28,12 @@ input::placeholder {
     color: #949494;
 }
 
+.user span {
+    font-size: 16px;
+    color: #fff;
+}
+
+
 @keyframes subnavGrowth {
     from {
         opacity: 0;
