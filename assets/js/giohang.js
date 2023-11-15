@@ -10,94 +10,24 @@ document.addEventListener("DOMContentLoaded", function() {
   onlinePayment.addEventListener("change", function () {
     cashPayment.checked = !onlinePayment.checked;
   });
-
-  var inputElement = document.querySelector('.pass');
-  var placeholders = ["Bạn muốn tìm gì ...", "Đèn trang trí nội thất", "Đèn trang trí ngoại thất"];
-  var currentIndex = 0;
-  var animationTimeout;
-
-  function typePlaceholder() {
-    var placeholderText = placeholders[currentIndex];
-    inputElement.setAttribute("placeholder", ""); // Xóa nội dung placeholder
-
-    var length = placeholderText.length;
-    var currentLength = 0;
-
-    animationTimeout = setInterval(function() {
-      if (currentLength <= length) {
-        inputElement.setAttribute("placeholder", placeholderText.substring(0, currentLength));
-        currentLength++;
-      } else {
-        clearInterval(animationTimeout);
-        setTimeout(deletePlaceholder, 1000); // Sau khi hiển thị, đợi 1 giây trước khi xóa
-      }
-    }, 30); // Tốc độ viết
-    currentIndex = (currentIndex + 1) % placeholders.length; // Đặt lại currentIndex khi nó đạt cuối mảng
-  }
-
-  function deletePlaceholder() {
-    var placeholderText = inputElement.getAttribute("placeholder");
-    var length = placeholderText.length;
-    var currentLength = length;
-
-    animationTimeout = setInterval(function() {
-      if (currentLength >= 0) {
-        inputElement.setAttribute("placeholder", placeholderText.substring(0, currentLength));
-        currentLength--;
-      } else {
-        clearInterval(animationTimeout);
-        setTimeout(typePlaceholder, 500); // Sau khi xóa, đợi 0.5 giây trước khi hiển thị tiếp
-      }
-    }, 20); // Tốc độ xóa
-
-    currentIndex = (currentIndex + 1) % placeholders.length; // Đặt lại currentIndex khi nó đạt cuối mảng
-  }
-  // Gọi hàm typePlaceholder để bắt đầu hiển thị placeholder đầu tiên
-  typePlaceholder();
-
-  // Lấy số lượng ban đầu từ trường nhập liệu
-  var quantity = parseInt(document.querySelector(".product-quantity input.qty").value);
-  var selectProduct = document.querySelector(".product-quantity input.qty");
-  var tang =  document.querySelector(".quantity_up");
-  var giam =  document.querySelector(".quantity_down");
-
-  // Xử lý sự kiện khi nhấn nút giảm
-  giam.addEventListener("click", function () {
-    if (quantity > 0) {
-      quantity -= 1;
-    } else {
-      quantity = 0;
-    }
-    selectProduct.value = quantity;
-  });
-
-  // Xử lý sự kiện khi nhấn nút tăng
-  tang.addEventListener("click", function () {
-    if (quantity < 100) {
-      quantity += 1;
-    } else {
-      quantity = 100;
-    }
-    selectProduct.value = quantity;
-  });
 });
 
 var app = angular.module('AppBanHang', []);
 app.controller("CartCtrl", function ($scope, $http) {
-    $scope.getCartItems = function () {
-        if (typeof(Storage) !== "undefined") {
-            var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-            $scope.cartItems = cartItems;
-        } else {
-            console.error('Local storage không được hỗ trợ');
-        }
-    };
-    $scope.getCartItems();
+  $scope.getCartItems = function () {
+      if (typeof(Storage) !== "undefined") {
+          var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+          $scope.cartItems = cartItems;
+      } else {
+          console.error('Local storage không được hỗ trợ');
+      }
+  };
+  $scope.getCartItems();
 
-     // Hàm tăng số lượng sản phẩm
-     $scope.incrementQuantity = function (item) {
-      item.quantity++;
-      $scope.saveCart();
+    // Hàm tăng số lượng sản phẩm
+    $scope.incrementQuantity = function (item) {
+    item.quantity++;
+    $scope.saveCart();
   };
 
   // Hàm giảm số lượng sản phẩm
@@ -116,10 +46,17 @@ app.controller("CartCtrl", function ($scope, $http) {
   };
 
   // Hàm xóa sản phẩm khỏi giỏ hàng
+  $scope.removeFromCart = function (index) {
+    $scope.cartItems.splice(index, 1);
+    $scope.saveCart();
+  };
+
+  // Hàm xóa sản phẩm khỏi giỏ hàng
   $scope.confirmDelete = function (item) {
     var confirmation = confirm("Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?");
     if (confirmation) {
         $scope.removeFromCart($scope.cartItems.indexOf(item));
+        console.log($scope.cartItems.indexOf(item));
     }
   };
 
@@ -143,7 +80,8 @@ app.controller("CartCtrl", function ($scope, $http) {
 
   // Hàm xóa hết dữ liệu trong giỏ hàng
   $scope.clearCart = function () {
-    if (typeof(Storage) !== "undefined") {
+    var confirmation = confirm("Bạn có chắc muốn xóa toàn bộ sản phẩm khỏi giỏ hàng?");
+    if (confirmation) {
         localStorage.removeItem('cart');
         $scope.cartItems = [];
     } else {
@@ -191,7 +129,5 @@ app.controller("CartCtrl", function ($scope, $http) {
         location.reload();
     });
   };
-
-
 });
 

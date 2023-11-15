@@ -29,13 +29,19 @@ app.controller("HomeCtrl", function ($scope, $http) {
             // Lưu các sản phẩm trong giỏ hàng đã cập nhật trở lại local storage
             localStorage.setItem('cart', JSON.stringify(cartItems));
 
-            // alert('Đã thêm sản phẩm vào giỏ hàng!');
+            alert('Đã thêm sản phẩm vào giỏ hàng!');
         } else {
             console.error('Local storage không được hỗ trợ');
         }
     };
 
     // -------------TRANG CHỦ---------------
+    $scope.searchKeyword = "";
+
+    $scope.search = function () {
+        window.location.href = 'search.html?ten_sp=' + $scope.searchKeyword;
+    };
+    
     $scope.listItem;
     $scope.GetDenChum = function () {
         $http({
@@ -98,50 +104,4 @@ app.controller("HomeCtrl", function ($scope, $http) {
         });
     };  
     $scope.LoadTaiKhoan()
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    var inputElement = document.querySelector('.pass');
-    var placeholders = ["Bạn muốn tìm gì ...", "Đèn trang trí nội thất", "Đèn trang trí ngoại thất"];
-    var currentIndex = 0;
-    var animationTimeout;
-  
-    function typePlaceholder() {
-      var placeholderText = placeholders[currentIndex];
-      inputElement.setAttribute("placeholder", ""); // Xóa nội dung placeholder
-  
-      var length = placeholderText.length;
-      var currentLength = 0;
-  
-      animationTimeout = setInterval(function() {
-        if (currentLength <= length) {
-          inputElement.setAttribute("placeholder", placeholderText.substring(0, currentLength));
-          currentLength++;
-        } else {
-          clearInterval(animationTimeout);
-          setTimeout(deletePlaceholder, 1000); // Sau khi hiển thị, đợi 1 giây trước khi xóa
-        }
-      }, 30); // Tốc độ viết
-      currentIndex = (currentIndex + 1) % placeholders.length; // Đặt lại currentIndex khi nó đạt cuối mảng
-    }
-  
-    function deletePlaceholder() {
-      var placeholderText = inputElement.getAttribute("placeholder");
-      var length = placeholderText.length;
-      var currentLength = length;
-  
-      animationTimeout = setInterval(function() {
-        if (currentLength >= 0) {
-          inputElement.setAttribute("placeholder", placeholderText.substring(0, currentLength));
-          currentLength--;
-        } else {
-          clearInterval(animationTimeout);
-          setTimeout(typePlaceholder, 500); // Sau khi xóa, đợi 0.5 giây trước khi hiển thị tiếp
-        }
-      }, 20); // Tốc độ xóa
-  
-      currentIndex = (currentIndex + 1) % placeholders.length; // Đặt lại currentIndex khi nó đạt cuối mảng
-    }
-    // Gọi hàm typePlaceholder để bắt đầu hiển thị placeholder đầu tiên
-    typePlaceholder();
 });

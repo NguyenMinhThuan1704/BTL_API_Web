@@ -28,6 +28,10 @@ input::placeholder {
     color: #949494;
 }
 
+.pass::placeholder {
+    color: white;
+}
+
 .user span {
     font-size: 16px;
     color: #fff;
