@@ -174,7 +174,6 @@ function SuaKhachHang(icon) {
 }
 
 function CapNhat() {
-
     var maKH = document.getElementById("btnUpdate").getAttribute("data-makh");
     var tenKH = document.getElementById("TenKH").value;
     var diaChi = document.getElementById("DiaChi").value;

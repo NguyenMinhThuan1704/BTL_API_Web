@@ -1,6 +1,40 @@
 var app = angular.module('AppAdmin', []);
 app.controller("SanPhamController", function ($scope, $http) {
 
+    // Hàm để thêm sản phẩm vào giỏ hàng
+    $scope.addToCart = function (product) {
+        // Kiểm tra xem local storage có được hỗ trợ không
+        if (typeof(Storage) !== "undefined") {
+            // Lấy các sản phẩm trong giỏ hàng từ local storage hoặc khởi tạo một mảng rỗng nếu chưa có
+            var cartItems = JSON.parse(localStorage.getItem('cartAdmin')) || [];
+
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            var existingProduct = cartItems.find(item => item.maSanPham === product.maSanPham);
+
+            if (existingProduct) {
+                // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng hoặc thông tin liên quan khác
+                existingProduct.soLuong += 1;
+            } else {
+                // Nếu sản phẩm chưa có trong giỏ hàng, thêm nó vào giỏ hàng
+                cartItems.push({
+                    maSanPham: product.maSanPham,
+                    tenSanPham: product.tenSanPham,
+                    anhDaiDien: product.anhDaiDien,
+                    giaGiam: product.giaGiam,
+                    gia: product.gia,
+                    soLuong: 1 
+                });
+            }
+
+            // Lưu các sản phẩm trong giỏ hàng đã cập nhật trở lại local storage
+            localStorage.setItem('cartAdmin', JSON.stringify(cartItems));
+
+            alert('Đã thêm sản phẩm hóa đơn nhập!');
+        } else {
+            console.error('Local storage không được hỗ trợ');
+        }
+    };
+
     $scope.listSP;
     $scope.page = 1;
     $scope.changePage = function (pageNum) {
@@ -17,7 +51,6 @@ app.controller("SanPhamController", function ($scope, $http) {
             $scope.listSP = response.data.data;
         });
     };
-
     $scope.GetSanPham();
 
     document.getElementById('btnSearch').addEventListener('click', function() {

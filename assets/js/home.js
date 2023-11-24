@@ -1,16 +1,13 @@
 var app = angular.module('AppBanHang', []);
 app.controller("HomeCtrl", function ($scope, $http) {
-
     // Hàm để thêm sản phẩm vào giỏ hàng
     $scope.addToCart = function (product) {
         // Kiểm tra xem local storage có được hỗ trợ không
         if (typeof(Storage) !== "undefined") {
             // Lấy các sản phẩm trong giỏ hàng từ local storage hoặc khởi tạo một mảng rỗng nếu chưa có
             var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-
             // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
             var existingProduct = cartItems.find(item => item.maSanPham === product.maSanPham);
-
             if (existingProduct) {
                 // Nếu sản phẩm đã có trong giỏ hàng, cập nhật số lượng hoặc thông tin liên quan khác
                 existingProduct.quantity += 1;
@@ -25,7 +22,6 @@ app.controller("HomeCtrl", function ($scope, $http) {
                     quantity: 1 
                 });
             }
-
             // Lưu các sản phẩm trong giỏ hàng đã cập nhật trở lại local storage
             localStorage.setItem('cart', JSON.stringify(cartItems));
 
@@ -34,7 +30,6 @@ app.controller("HomeCtrl", function ($scope, $http) {
             console.error('Local storage không được hỗ trợ');
         }
     };
-
     // -------------TRANG CHỦ---------------
     $scope.searchKeyword = "";
 

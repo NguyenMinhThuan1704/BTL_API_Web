@@ -3,15 +3,13 @@ app.controller("ChiTietCtrl", function ($scope, $http) {
     $scope.sp;  
     $scope.LoadSanPhambyID = function () { 
 		var key = 'id';
-		var value = window.location.search.substring(window.location.search.indexOf(key)+key.length+1);		 
+		var value = window.location.search.substring(window.location.search.indexOf(key)+key.length+1);		
+        console.log(value); 
         $http({
             method: 'GET', 
             url: current_url + '/api/SanPham/get-by-id/'+value,
         }).then(function (response) { 
             $scope.sp = response.data;
-            // $scope.maloaispa = response.data.maLoaiSanPham;
-            // console.log($scope.maLoaiSanPham);
-			// makeScript('js/main.js')
         });
     };  
     $scope.LoadSanPhambyID()
