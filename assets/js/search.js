@@ -8,7 +8,6 @@ app.controller("SearchCtrl", function ($scope, $http) {
     var linkElement = document.querySelector('.search-title a');
     linkElement.textContent = decodedValue;
     linkElement.title = decodedValue;
-
     console.log(decodedValue);
 
     $scope.listItem = [];

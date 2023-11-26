@@ -63,6 +63,123 @@ app.controller("HomeCtrl", function ($scope, $http) {
     };   
 	$scope.GetDenMam();
 
+    $scope.listDenTha;
+    $scope.GetDenTha = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 4},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenTha = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenTha();
+
+    $scope.listDenTuong;
+    $scope.GetDenTuong = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 5},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenTuong = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenTuong();
+
+    $scope.listDenChuyenDung;
+    $scope.GetDenChuyenDung = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 6},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenChuyenDung = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenChuyenDung();
+
+    $scope.listDenSoi;
+    $scope.GetDenSoi = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 7},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenSoi = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenSoi();
+
+    $scope.listDenLed;
+    $scope.GetDenLed = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 8},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenLed = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenLed();
+
+    $scope.listDenNgoaiThat;
+    $scope.GetDenNgoaiThat = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 9},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenNgoaiThat = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenNgoaiThat();
+
+    $scope.listDenNangLuong;
+    $scope.GetDenNangLuon = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 10},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenNangLuong = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenNangLuon();
+
+    $scope.listDen_phukien;
+    $scope.GetDen_phukien = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 11},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDen_phukien = response.data.data;  
+
+        });
+    };   
+	$scope.GetDen_phukien();
+
+    $scope.listDenThanhLy;
+    $scope.GetDenThanhLy = function () {
+        $http({
+            method: 'POST',
+            data: { page: 1, pageSize: 8, maloaisp: 12},
+            url: current_url + '/api/SanPham/search',
+        }).then(function (response) {  
+            $scope.listDenThanhLy = response.data.data;  
+
+        });
+    };   
+	$scope.GetDenThanhLy();
+
     $scope.sanphammoinhat;
     $scope.GetMoiNhat= function () {
         $http({

@@ -97,11 +97,11 @@
                         <a href="./gioithieu.html">Giới thiệu</a>
                     </li>
                     <li class="header__nav-item menu-item">
-                        <a href="">Đèn trang trí ngoại thất</a>
+                        <a>Loại đèn trang trí</a>
                         <i class="fa-solid fa-angle-down"></i>
                         <ul class="subnav">
                             <li class="subnav-item">
-                                <a href="./dennoithat.html">Đèn Nội Thất</a>
+                                <a href="./dennoithat.html?id=2">Đèn Nội Thất</a>
                                <i class="fa-solid fa-angle-right"></i>
                                <ul class="subnav1">
                                     <li>
@@ -119,7 +119,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn Chùm</a>
+                                <a href="./dennoithat.html?id=2">Đèn Chùm</a>
                                <i class="fa-solid fa-angle-right"></i>
                                <ul class="subnav1">
                                     <li>
@@ -146,7 +146,7 @@
                                 </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn Mâm Ốp Trần</a>
+                                <a href="./dennoithat.html?id=3">Đèn Mâm Ốp Trần</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -179,7 +179,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn Thả</a>
+                                <a href="./dennoithat.html?id=4">Đèn Thả</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -212,7 +212,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn Tường</a>
+                                <a href="./dennoithat.html?id=5">Đèn Tường</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -245,7 +245,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn Chuyên Dụng</a>
+                                <a href="./dennoithat.html?id=6">Đèn Chuyên Dụng</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -275,7 +275,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn Soi Tranh - Gương</a>
+                                <a href="./dennoithat.html?id=7">Đèn Soi Tranh - Gương</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -287,7 +287,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn downlight Led</a>
+                                <a href="./dennoithat.html?id=8">Đèn downlight Led</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -305,7 +305,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn ngoại thất</a>
+                                <a href="./dennoithat.html?id=9">Đèn ngoại thất</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -338,7 +338,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn năng lượng mặt trời</a>
+                                <a href="./dennoithat.html?id=10">Đèn năng lượng mặt trời</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -362,7 +362,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Bóng đèn và phụ kiện</a>
+                                <a href="./dennoithat.html?id=11">Bóng đèn và phụ kiện</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -374,7 +374,7 @@
                                </ul>
                             </li>
                             <li class = "subnav-item">
-                                <a href="">Đèn trưng bày thanh lý</a>
+                                <a href="./dennoithat.html?id=12">Đèn trưng bày thanh lý</a>
                                <i class="fa-solid fa-angle-right"></i>
                                 <ul class="subnav1">
                                     <li>
@@ -522,8 +522,12 @@
                           <div class="bt_quantity_update quantity_up">+</div>
                         </div>
     
-                        <input type="submit" name="muangay" id="muangay" class="btn btn-info btn-cart" value=" Mua hàng ">
-                        <input type="submit" name="them" id="them" class="btn btn-info btn-cart" value=" Thêm vào giỏ hàng ">
+                        <a ng-click="addToCart(sp)" href="./giohang.html">
+                            <input type="submit" name="muangay" id="muangay" class="btn btn-info btn-cart" value=" Mua hàng ">
+                        </a>
+                        <a ng-click="addToCart(sp)">
+                            <input type="submit" name="them" id="them" class="btn btn-info btn-cart" value=" Thêm vào giỏ hàng ">
+                        </a>
                     </div>
 
                     <div class="divauthor even">
@@ -572,7 +576,7 @@
             <div class="row related__products-item-wrapper">
               <div class="related__products-item col l-3 m-4 c-6" ng-repeat="y in splq">
                   <div class="related__products-img-wrapper">
-                      <a href="">
+                      <a href="./index_product.html?id={{y.maSanPham}}?mlsp={{y.maLoaiSanPham}}">
                           <!-- <img src="./assets/img/New product/1.jpg" alt="" class="related__products-img"> -->
                           <img src="{{y.anhDaiDien}}" alt="" class="related__products-img">
                       </a>
@@ -585,7 +589,7 @@
                   <div class="product__title">
                       <div class="product__title-name">
                           <!-- <a href="">Đèn ốp trần hiệu ứng ánh sáng hình ngôi sao mặt trăng D600mm DR-NC596</a> -->
-                          <a href="">{{y.tenSanPham}}</a>
+                          <a href="./index_product.html?id={{y.maSanPham}}?mlsp={{y.maLoaiSanPham}}">{{y.tenSanPham}}</a>
                       </div>
                       <div class="product__title-price">
                           <ul class="price-list">
@@ -598,317 +602,9 @@
                   </div>
 
                   <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
+                      <a ng-click="addToCart(y)" href="./giohang.html" class="item-title-link">Mua ngay</a>
                   </div>
               </div>
-
-              <!-- <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/2.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn chùm thả trần phòng khách có hiệu ứng ánh sáng D900mm DR-NC1143/8</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/3.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn ốp trần hiệu ứng ánh sáng hình ngôi sao mặt trăng D600mm DR-NC596</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/4.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn thả trần pha lê 3 vòng trang trí phòng khách sang trọng DR-NB2176B</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/5.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn pha lê thả trần phòng khách vẽ họa tiết độc lạ D800mm DR-NB03B</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/6.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Quạt trần cánh cụp cánh xòe bằng nhựa màu nâu có gắn đèn led DR-Q9315</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/7.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn tường led trang trí phòng ngủ hình chim đậu cành cây DC-VKT10A</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/8.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn chùm pha lê thả trần phòng khách 18 tay nến D1200mm HP-CFL3521</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/9.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn treo tường thân sơn vàng gắn phòng khách, phòng ngủ H340mm EC-V881</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/10.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn ốp trần trang trí phòng khách hiện đại cao cấp 1100x700mm EC-ML50</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/11.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn mâm ốp trần phòng khách tạo hiệu ứng ánh sáng trăng sao EC-ML51</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div>
-
-              <div class="related__products-item col l-3 m-4 c-6">
-                  <div class="related__products-img-wrapper">
-                      <a href="">
-                          <img src="./assets/img/New product/12.jpg" alt="" class="related__products-img">
-                      </a>
-                  </div>
-
-                  <div class="sale-hot">
-                      <span>30%</span>
-                  </div>
-
-                  <div class="product__title">
-                      <div class="product__title-name">
-                          <a href="">Đèn chùm nhánh cây phòng khách, chung cư 15 bóng D1000mm PH-THCN293</a>
-                      </div>
-                      <div class="product__title-price">
-                          <ul class="price-list">
-                              <li class="price-item">2.321.000đ</li>
-                              <li class="price-item">3.570.000đ</li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="item-title-add">
-                      <a href="" class="item-title-link">Mua ngay</a>
-                  </div>
-              </div> -->
-
             </div>  
         </div>
 
