@@ -63,6 +63,6 @@ function TinTuc() {
     window.location.href = "../admin/TinTuc.html";
 }
 
-// function ThietLap() {
-//     window.location.href = "../admin/ThietLap.html";
-// }
+function ThongKe() {
+    window.location.href = "../admin/ThongKe.html";
+}

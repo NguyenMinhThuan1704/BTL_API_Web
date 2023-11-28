@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="../assets/css/style_mainQT.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/click.js"></script>
     <script src="../assets/js/angular.min.js"></script>
-    <script src="../assets/js/globalAD.js"></script>
-    <script src="../assets/js/hoadonnhap.js"></script>
+    <script src="./js/click.js"></script>
+    <script src="./js/globalAD.js"></script>
+    <script src="./js/hoadonnhap.js"></script>
     <title>Quản lý cửa hàng bán đèn trang trí</title>
     <style>
         .hidden {
@@ -46,7 +46,9 @@
                 <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
                 <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
                 <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
-                <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button>
+                <button onclick="ThongKe()"><i class="fas fa-cogs"></i> Thống kê</button>
+
+                <!-- <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button> -->
             </div>
             <div class="col-11 col-s-12 content">
                 <div class="col-5 col-s-12 content">
@@ -228,11 +230,9 @@
                                         </td> -->
                                         <td style="text-align: center;">
                                             <i class="fas fa-edit" title="Sửa" ng-click="editHoaDonNhap(hdn)"></i>
-
-                                            <!-- <i class="fas fa-edit" title="Sửa" data-mahdn="{{hdn.maHoaDonNhap}}" data-matk="{{hdn.maTaiKhoan}}" data-manpp="{{hdn.maNhaPhanPhoi}}" data-kieuthanhtoan="{{hdn.kieuThanhToan}}" data-tongtien="{{hdn.tongtien}}" list_cthdn="{{hdn.list_json_chitiethdn}}" onclick="SuaHDN(this)"></i> -->
                                             <i class="fas fa-trash-alt" title="Xóa" data-mahdn="{{hdn.maHoaDonNhap}}"></i>
-                                        
                                             <a href="?id={{hdn.maHoaDonNhap}}" class="detail" id="myLink" ng-click="toggleInvoiceDetails()" data-mahdn="{{hdn.maHoaDonNhap}}" style="cursor: pointer;">Xem chi tiết hóa đơn {{hdn.maHoaDonNhap}}</a>
+                                            <a href="./InHoaDonNhap.html?id={{hdn.maHoaDonNhap}}" style="padding-left: 4px; border-left: 1px solid #6b6868;" class="detail" ng-click="print()">In hóa đơn</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -268,12 +268,13 @@
                 <div class="tabcontent">
                     <div class="title">
                         <div class="title_wrap" style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <i class="fas fa-file-import"></i>Chi tiết hóa đơn
+                            <i class="fas fa-file-import"></i>Chi tiết hóa đơn nhập
                             <i class="fa-solid fa-xmark" ng-click="toggleInvoiceDetails()" style="font-size: 26px;"></i>
                         </div>
                         <hr>
                     </div>
                     <div class="product__wrapper">
+                        <div class="macthdn"></div>
                         <div class="row grid wide" style="margin-top: 10px;">
                             <div class="col c-12" ng-repeat="ct in cthdn" style="margin-top: 12px; display: flex;">
                                 <div class="col c-2 product__img" >
@@ -320,7 +321,6 @@
     </section>
     <!-- <div id="dynamic-content" style="display: flex; justify-content: center; align-items: center;" class="hidden"></div> -->
     <!-- <iframe id="myIframe" src="" width="1000px" height="1000px" frameborder="0"></iframe> -->
-
 </body>
 
 </html>

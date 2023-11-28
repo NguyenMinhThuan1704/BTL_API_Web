@@ -15,7 +15,7 @@ app.controller("SearchCtrl", function ($scope, $http) {
     $scope.GetSearch = function () {
         $http({
             method: 'POST',
-            data: { page: 1, pageSize: 20, ten_sp: decodedValue },
+            data: { page: 1, pageSize: 100, ten_sp: decodedValue },
             url: current_url + '/api/SanPham/search',
         }).then(function (response) {  
             $scope.listItem = response.data.data; 

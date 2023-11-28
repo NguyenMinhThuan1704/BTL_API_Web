@@ -29,9 +29,9 @@ app.controller("TaiKhoanController", function ($scope, $http) {
         };
     
         $scope.GetTaiKhoan = function () {
-            loaitk = 0;
             var loaitk = document.getElementById('TenLoaiTaiKhoan1').value;
-            console.log(loaitk)
+            loaitk = loaitk.trim() === "" ? 0 : loaitk;
+
             $http({
                 method: 'POST',
                 data: {

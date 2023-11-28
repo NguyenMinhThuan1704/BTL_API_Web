@@ -1,15 +1,6 @@
 var app = angular.module('AppAdmin', []);
-app.controller("HDNController", function ($scope, $http) {
+app.controller("HDNController", function ($scope, $http, $timeout) {
     $scope.cthdn;
-    $scope.maHDN;
-    
-    document.addEventListener('click', function (event) {
-        var target = event.target;
-        $scope.maHDN = target.getAttribute('data-mahdn');
-        var mahdn = $scope.maHDN;
-        // console.log(mahdn);
-        // document.getElementById("myLink").setAttribute("data-mahdn", mahdn);
-    });
     
     $scope.GetCTHDN = function () {
         var key = 'id';
@@ -23,7 +14,7 @@ app.controller("HDNController", function ($scope, $http) {
             // Ngược lại, hiển thị thẻ
             var invoiceDetailsElement = document.getElementById('invoiceDetails');
             if (invoiceDetailsElement) {
-                invoiceDetailsElement.style.display = 'block'; // hoặc 'inline', 'inline-block', tùy vào kiểu thẻ bạn muốn hiển thị
+                invoiceDetailsElement.style.display = 'block';
             }
         }	
         var result = (value === '') ? 0 : value;
@@ -159,8 +150,9 @@ app.controller("HDNController", function ($scope, $http) {
    // Hàm chuẩn bị dữ liệu và gọi API để thêm vào CSDL
    $scope.addHoaDonNhapCSDL = function () {
     var maNhanVien = document.getElementById('TenNhanVien').value;
+    var maNhaPhanPhoi = document.getElementById('TenNPP').value;
 
-    if (!maNhanVien || !$scope.nhaPhanPhoi || !$scope.kieuThanhToan) {
+    if (!maNhanVien || !maNhaPhanPhoi|| !$scope.kieuThanhToan) {
       return alert("Thông tin nhập thiếu! Vui lòng kiểm tra lại");
     }
 
@@ -191,7 +183,6 @@ app.controller("HDNController", function ($scope, $http) {
         data: dataToSend,
         url: current_url_ad + '/api/HoaDonNhap/create-hoadonnhap',
     }).then(function (response) {
-        // Xử lý kết quả từ API nếu cần
         console.log(response.data);
         alert("Thêm hóa đơn nhập thành công!")
         localStorage.removeItem('cartAdmin');
@@ -232,12 +223,45 @@ app.controller("HDNController", function ($scope, $http) {
     }, true);
 
     $scope.toggleInvoiceDetails = function() {
-        var invoiceSection = document.getElementById("invoiceDetails");
-        if (invoiceSection.classList.contains("hidden")) {
-            invoiceSection.classList.remove("hidden");
-        } else {
-            invoiceSection.classList.add("hidden");
-        }
+        var invoiceDetailsElement = document.getElementById('invoiceDetails');
+        if (invoiceDetailsElement) {
+            invoiceDetailsElement.style.display = 'none';
+        }else {
+            invoiceDetailsElement.style.display = 'block';
+        }	
+    };
+
+//-----------------------------IN HÓA ĐƠN NHẬP--------------------------------
+    $scope.maHoaDon;
+    $scope.listBill;
+    $scope.detailBill = [];
+    $scope.getDetailBill = function() {
+        var key = 'id';
+		var maHoaDon = window.location.search.substring(window.location.search.indexOf(key)+key.length+1);		
+        // var urlParams = new URLSearchParams(window.location.search);
+        // var maHoaDon = urlParams.get("id"); 
+        $http({
+        method: "GET",
+        url: current_url_ad + '/api/HoaDonNhap/get-by-id/'+ maHoaDon,
+        // url: current_url_ad + '/api/HoaDonNhap/get-by-id/6',
+        }).then(function (response) {
+        console.log(response.data);
+        $scope.listBill = response.data;
+        $scope.detailBill = $scope.listBill.list_json_chitiethoadonnhap;
+        $scope.maHoaDon = maHoaDon;
+        });
+    }
+    $scope.getDetailBill();
+
+    $scope.print = function () {
+        window.location.href = "InHoaDonNhap.html?id=" + $scope.maHoaDon;
+        // window.location.href = "InHoaDonNhap.html?id=4";
+        
+    };
+    $scope.inHoaDon = function () {
+        $timeout(function () {
+            window.print();
+        }, 2000);
     };
 });
 

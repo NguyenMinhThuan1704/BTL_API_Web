@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="color: transparent;">.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        body {
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        tr {
+            line-height: 27px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .ngay {
+            font-style: italic;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .ban {
+            font-style: italic;
+            font-size: 15px;
+            margin: 3px 0px;
+        }
+
+        .dam {
+            font-weight: bold;
+        }
+
+        .le {
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .doi {
+            width: 50%;
+            float: left;
+        }
+
+        .ky {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .ky1 {
+            font-style: italic;
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
+    <script src="../assets/js/angular.min.js"></script>
+    <script src="./js/globalAD.js"></script>
+</head>
+
+<body ng-app="AppAdmin" ng-controller="HDNController" ng-init="inHoaDon()">
+    <section style="text-align: center; margin: 25px 0;">
+        <h1>HÓA ĐƠN NHẬP HÀNG</h1>
+        <!-- <div class="ngay">
+            <p id="date"></p>
+        </div> -->
+    </section>
+
+    <div class="le dam">Tên đơn vị nhập hàng: NMT Decorative Lights</div>
+    <div class="le">Mã số thuế: 123456789</div>
+    <div class="le">Địa chỉ: Toàn thắng, Kim động , Hưng yên</div>
+    <div class="le doi">Điện thoại: 0929.884.753</div>
+    <div class="le doi">Số tài khoản: 123456789</div>
+    <div class="le dam">Nhân viên nhập: {{listBill.hoTen}}</div>
+    <div class="le dam">Nhà cung cấp: {{listBill.tenNhaPhanPhoi}}</div>
+    <div class="le">Điện thoại: {{listBill.soDienThoai}}</div>
+    <div class="le">Địa chỉ: {{listBill.diaChi}}</div>
+    <div class="le doi">Số tài khoản: 526716147626186</div>
+    <div class="le">Ghi chú: </div>
+    <div class="le">Kiểu thanh toán: {{listBill.kieuThanhToan}}</div>
+
+    <table>
+
+        <tr style="background: #095b87; color: #fff;">
+            <th>Id</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá nhập</th>
+            <th>Tổng tiền</th>
+        </tr>
+        <tr ng-repeat="x in detailBill">
+            <td>{{x.maCTHDN}}</td>
+            <td>{{x.tenSanPham}}</td>
+            <td>{{x.soLuong}}</td>
+            <td>{{x.giaNhap}}</td>
+            <td>{{x.tongTien}}</td>
+        </tr>
+
+        <tr> 
+            <td colspan= "4" class="dam">Tổng tiền hóa đơn nhập</td>
+            <td class="dam">{{listBill.tongTien}}</td>
+        </tr>
+    </table>
+    <div class="doi dam ky">Người mua hàng</div>
+    <div class="doi dam ky">Người bán hàng</div>
+    <div class="doi ky1">(Ký, ghi rõ họ tên)</div>
+    <div class="doi ky1">(Ký, ghi rõ họ tên)</div>
+</body>
+
+<script src="./js/hoadonnhap.js"></script>
+
+</html>

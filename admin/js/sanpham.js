@@ -62,8 +62,8 @@ app.controller("SanPhamController", function ($scope, $http) {
         };
     
         $scope.GetSanPham = function () {
-            loaiSanPham = 0;
             var loaiSanPham = document.getElementById('TenLoaiSanPham1').value;
+            loaiSanPham = loaiSanPham.trim() === "" ? 0 : loaiSanPham;
         
             console.log(loaiSanPham)
             $http({

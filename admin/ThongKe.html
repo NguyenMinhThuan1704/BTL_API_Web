@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logoCPT.png">
+    <link rel="stylesheet" href="../assets/css/giohang.css">
+    <link rel="stylesheet" href="../assets/css/style_mainQT.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/angular.min.js"></script>
+    <script src="./js/click.js"></script>
+    <script src="./js/globalAD.js"></script>
+    <script src="./js/thongke.js"></script>
+    <title>Quản lý cửa hàng bán đèn trang trí</title>
+    <style>
+        .red-text {
+            color: red;
+        }
+    </style>
+</head>
+
+<body ng-app="AppAdmin"  ng-controller="HDNController">
+    <section class="header">
+        <a href="javascript:void(0);" class="icon" onclick="openBTN()">
+            <i class="fas fa-bars"></i>
+        </a>
+        <div class="box-login" id="box-t">
+            Xin chào, <span id="ten_nv">Admin</span> <i class="fas fa-sort-down"></i>
+            <div class="box-login-bottom" id="box-b">
+                <button onclick="TTTaiKhoan()"><i class="fas fa-user-alt"></i> Tài khoản</button>
+                <button onclick="LogOut();"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <div class="row">
+            <div class="col-1 col-s-12 category">
+                <button onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</button>
+                <button onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
+                <button onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</button>
+                <button onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</button>
+                <button onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</button>
+                <button onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</button>
+                <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
+                <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
+                <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
+                <button class="active" onclick="ThongKe()"><i class="fa-regular fa-newspaper"></i></i> Thống kê</button>
+                <!-- <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button> -->
+            </div>
+
+            <div class="col-11 col-s-12 content">
+                <div class="tabcontent">
+                    <div class="title">
+                        <i class="fa-regular fa-newspaper"></i> Thống kê hóa đơn nhập
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-s-12 padding-box">
+                            <select name="nhanvien" id="TenNhanVien" ng-model="nhanVien">
+                                <option value="">--Chọn nhân viên--</option>
+                                <option ng-repeat="nv in listCTTK" value="{{nv.maTaiKhoan}}">{{nv.maTaiKhoan}} - {{nv.hoTen}}</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            <select name="npp" id="TenNPP" ng-model="nhaPhanPhoi">
+                                <option value="">--Chọn nhà cung cấp--</option>
+                                <option ng-repeat="npp in listNPP" value="{{npp.maNhaPhanPhoi}}">{{npp.maNhaPhanPhoi}} - {{npp.tenNhaPhanPhoi}}</option>
+                            </select>
+                        </div>
+                        <div class="col-1 col-s-12 padding-box">
+                            <label for="txtright">Từ ngày:</label>
+                        </div>
+                        <div class="col-11 col-s-12 padding-box">
+                            <input type="datetime-local" id="search-export-fr" placeholder="Nhập mã hóa đơn bán...">
+                        </div>
+                        <div class="col-1 col-s-12 padding-box">
+                            <label for="txtright">Đến ngày:</label>
+                        </div>
+                        <div class="col-11 col-s-12 padding-box">
+                            <input type="datetime-local" id="search-export-to" placeholder="Nhập mã hóa đơn bán...">
+                        </div>
+                        <div class="col-4 col-s-12 padding-box" style="float: right;">
+                            <button id="btnSearch"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-s-12 padding-box">
+                            <table class="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Nhân viên</th>
+                                        <th>Nhà phân phối</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    <tr ng-repeat="hdn in listHDN">
+                                        <td>{{hdn.hoTen}}</td>
+                                        <td>{{hdn.tenNhaPhanPhoi}}</td>
+                                        <td>{{hdn.tenSanPham}}</td>
+                                        <td>{{hdn.soLuong}}</td>
+                                        <td>{{hdn.ngayTao}}</td>
+                                        <td>{{hdn.tongTien}}</td>
+                                    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Số lượng bản ghi: <span ng-class="{ 'red-text': totalQuantity > 0 }">{{totalItems}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Số lượng sản phẩm đã nhập: <span ng-class="{ 'red-text': totalQuantity > 0 }">{{totalQuantity}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Tổng tiền: <span ng-class="{ 'red-text': totalQuantity > 0 }">{{totalAmount}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            <div class="box-sum">
+                                <div class="box-right">
+                                    <button><i class="fas fa-angle-left"></i></button>
+                                    <button ng-click="changePage(1)">1</button>
+                                    <button ng-click="changePage(2)">2</button>
+                                    <button ng-click="changePage(3)">3</button>
+                                    <button ng-click="changePage(4)">4</button>
+                                    <button ng-click="changePage(5)">5</button>
+                                    <!-- <button ng-click="changePage(6)">6</button>
+                                    <button ng-click="changePage(7)">7</button>
+                                    <button ng-click="changePage(8)">8</button>
+                                    <button ng-click="changePage(9)">9</button>
+                                    <button ng-click="changePage(10)">10</button> -->
+                                    <button><i class="fas fa-angle-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

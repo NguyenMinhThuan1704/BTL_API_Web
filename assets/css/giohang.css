@@ -22,8 +22,14 @@
     background-color: #f3f3f3;
 }
 
+.detail {
+    text-decoration: none;
+    color: #0072b4;
+}
+
 .detail:hover {
     text-decoration: underline;
+    color: orangered;
 }
 
 /* ------------------------banner------------------- */
