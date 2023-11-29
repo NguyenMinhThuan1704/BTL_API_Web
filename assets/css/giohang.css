@@ -394,10 +394,9 @@ input:focus {
 }
 
 /* ----------------------CONTENT------------------- */
-
 .thongtin,
 .content {
-    padding: 0 1rem 1rem 1rem;
+    /* padding: 0 1rem 1rem 1rem; */
 }
 
 .title-text {

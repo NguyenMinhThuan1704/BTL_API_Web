@@ -18,6 +18,35 @@
         .red-text {
             color: red;
         }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 
@@ -46,14 +75,196 @@
                 <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
                 <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
                 <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
-                <button class="active" onclick="ThongKe()"><i class="fa-regular fa-newspaper"></i></i> Thống kê</button>
-                <!-- <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button> -->
+                <button class="active" onclick="ThongKe()"><i class="fa-solid fa-chart-column"></i> Thống kê</button>
+            </div>
+            
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Tab1')" id="defaultOpen">Thống kê hóa đơn nhập</button>
+                <button class="tablinks" onclick="openTab(event, 'Tab2')">Thống kê hóa đơn bán</button>
+                <!-- <button class="tablinks" onclick="openTab(event, 'Tab3')">Doanh thu</button> -->
             </div>
 
             <div class="col-11 col-s-12 content">
-                <div class="tabcontent">
+                <div id="Tab1" class="tabcontent">
                     <div class="title">
-                        <i class="fa-regular fa-newspaper"></i> Thống kê hóa đơn nhập
+                        <i class="fa-solid fa-chart-column"></i> Thống kê hóa đơn nhập
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-s-12 padding-box">
+                            <select name="nhanvien" id="TenNhanVien" ng-model="nhanVien">
+                                <option value="">--Chọn nhân viên--</option>
+                                <option ng-repeat="nv in listCTTK" value="{{nv.maTaiKhoan}}">{{nv.maTaiKhoan}} - {{nv.hoTen}}</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            <select name="npp" id="TenNPP" ng-model="nhaPhanPhoi">
+                                <option value="">--Chọn nhà cung cấp--</option>
+                                <option ng-repeat="npp in listNPP" value="{{npp.maNhaPhanPhoi}}">{{npp.maNhaPhanPhoi}} - {{npp.tenNhaPhanPhoi}}</option>
+                            </select>
+                        </div>
+                        <div class="col-1 col-s-12 padding-box">
+                            <label for="txtright">Từ ngày:</label>
+                        </div>
+                        <div class="col-11 col-s-12 padding-box">
+                            <input type="datetime-local" id="search-export-fr-hdn">
+                        </div>
+                        <div class="col-1 col-s-12 padding-box">
+                            <label for="txtright">Đến ngày:</label>
+                        </div>
+                        <div class="col-11 col-s-12 padding-box">
+                            <input type="datetime-local" id="search-export-to-hdn">
+                        </div>
+                        <div class="col-4 col-s-12 padding-box" style="float: right;">
+                            <button id="btnSearch1"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-s-12 padding-box">
+                            <table class="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Nhân viên</th>
+                                        <th>Nhà phân phối</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    <tr ng-repeat="hdn in listHDN">
+                                        <td>{{hdn.hoTen}}</td>
+                                        <td>{{hdn.tenNhaPhanPhoi}}</td>
+                                        <td>{{hdn.tenSanPham}}</td>
+                                        <td>{{hdn.soLuong}}</td>
+                                        <td>{{hdn.ngayTao}}</td>
+                                        <td>{{hdn.tongTien}}</td>
+                                    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Số lượng bản ghi: <span ng-class="{ 'red-text': totalItems_hdn > 0 }">{{totalItems_hdn}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Số lượng sản phẩm đã nhập: <span ng-class="{ 'red-text': totalQuantity_hdn > 0 }">{{totalQuantity_hdn}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Tổng tiền: <span ng-class="{ 'red-text': totalAmount_hdn > 0 }">{{totalAmount_hdn}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            <div class="box-sum">
+                                <div class="box-right">
+                                    <button><i class="fas fa-angle-left"></i></button>
+                                    <button ng-click="changePage(1)">1</button>
+                                    <button ng-click="changePage(2)">2</button>
+                                    <button ng-click="changePage(3)">3</button>
+                                    <button ng-click="changePage(4)">4</button>
+                                    <button ng-click="changePage(5)">5</button>
+                                    <button ng-click="changePage(6)">6</button>
+                                    <button ng-click="changePage(7)">7</button>
+                                    <button ng-click="changePage(8)">8</button>
+                                    <button ng-click="changePage(9)">9</button>
+                                    <button ng-click="changePage(10)">10</button>
+                                    <button><i class="fas fa-angle-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-11 col-s-12 content">
+                <div id="Tab2" class="tabcontent">
+                    <div class="title">
+                        <i class="fa-solid fa-chart-column"></i> Thống kê hóa đơn bán
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 col-s-12 padding-box">
+                            <label for="txtright">Tên khách hàng:</label>
+                        </div>
+                        <div class="col-10 col-s-12 padding-box">
+                            <input type="text" id="search-customer" ng-model="tenkh" placeholder="Nhập tên khách hàng...">
+                        </div>
+                        <div class="col-1 col-s-12 padding-box">
+                            <label for="txtright">Từ ngày:</label>
+                        </div>
+                        <div class="col-11 col-s-12 padding-box">
+                            <input type="datetime-local" id="search-export-fr-hdb">
+                        </div>
+                        <div class="col-1 col-s-12 padding-box">
+                            <label for="txtright">Đến ngày:</label>
+                        </div>
+                        <div class="col-11 col-s-12 padding-box">
+                            <input type="datetime-local" id="search-export-to-hdb">
+                        </div>
+                        <div class="col-4 col-s-12 padding-box" style="float: right;">
+                            <button id="btnSearch2"><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-s-12 padding-box">
+                            <table class="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Tên khách hàng</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    <tr ng-repeat="hdb in listHDB">
+                                        <td>{{hdb.tenKH}}</td>
+                                        <td>{{hdb.diachi}}</td>
+                                        <td>{{hdb.tenSanPham}}</td>
+                                        <td>{{hdb.soLuong}}</td>
+                                        <td>{{hdb.ngayTao}}</td>
+                                        <td>{{hdb.tongGia}}</td>
+                                    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Số lượng bản ghi: <span ng-class="{ 'red-text': totalItems_hdb > 0 }">{{totalItems_hdb}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Số lượng sản phẩm đã bán: <span ng-class="{ 'red-text': totalQuantity_hdb > 0 }">{{totalQuantity_hdb}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            Tổng tiền: <span ng-class="{ 'red-text': totalAmount_hdb > 0 }">{{totalAmount_hdb}}</span>
+                        </div>
+                        <div class="col-12 col-s-12 padding-box">
+                            <div class="box-sum">
+                                <div class="box-right">
+                                    <button><i class="fas fa-angle-left"></i></button>
+                                    <button ng-click="changePage(1)">1</button>
+                                    <button ng-click="changePage(2)">2</button>
+                                    <button ng-click="changePage(3)">3</button>
+                                    <button ng-click="changePage(4)">4</button>
+                                    <button ng-click="changePage(5)">5</button>
+                                    <button ng-click="changePage(6)">6</button>
+                                    <button ng-click="changePage(7)">7</button>
+                                    <button ng-click="changePage(8)">8</button>
+                                    <button ng-click="changePage(9)">9</button>
+                                    <button ng-click="changePage(10)">10</button>
+                                    <button><i class="fas fa-angle-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-11 col-s-12 content">
+                <div id="Tab3" class="tabcontent">
+                    <div class="title">
+                        <i class="fa-solid fa-chart-column"></i> Thống kê doanh thu
                         <hr>
                     </div>
                     <div class="row">
@@ -129,21 +340,20 @@
                                     <button ng-click="changePage(3)">3</button>
                                     <button ng-click="changePage(4)">4</button>
                                     <button ng-click="changePage(5)">5</button>
-                                    <!-- <button ng-click="changePage(6)">6</button>
+                                    <button ng-click="changePage(6)">6</button>
                                     <button ng-click="changePage(7)">7</button>
                                     <button ng-click="changePage(8)">8</button>
                                     <button ng-click="changePage(9)">9</button>
-                                    <button ng-click="changePage(10)">10</button> -->
+                                    <button ng-click="changePage(10)">10</button>
                                     <button><i class="fas fa-angle-right"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
-
 </body>
 
 </html>

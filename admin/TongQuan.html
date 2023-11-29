@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/logoCPT.png">
     <link rel="stylesheet" href="../assets/css/style_mainQT.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/core.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/angular.min.js"></script>
     <script src="./js/click.js"></script>
     <script src="./js/globalAD.js"></script>
     <script src="./js/tongquan.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
+    <script src="./js/bieudo.js"></script>
+    <script src="./js/admin.js"></script>
     <title>Quản lý cửa hàng bán đèn trang trí</title>
 </head>
 
@@ -29,7 +34,7 @@
         </div>
     </section>
     <section class="main">
-        <div class="row">
+        <div class="row all">
             <div class="col-1 col-s-12 category">
                 <button class="active" onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</button>
                 <button onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</button>
@@ -40,120 +45,106 @@
                 <button onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</button>
                 <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
                 <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
-                <button onclick="ThongKe()"><i class="fas fa-cogs"></i> Thống kê</button>
-                <!-- <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button> -->
+                <button onclick="ThongKe()"><i class="fa-solid fa-chart-column"></i> Thống kê</button>
             </div>
-            <!-- <div class="bx-left" id="button-left">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeBTN()"><i
-                        class="far fa-window-close"></i></a>
-                <ul>
-                    <li onclick="TongQuan()"><i class="fas fa-tachometer-alt"></i> Tổng quan</li>
-                    <li onclick="LoaiSanPham()"><i class="fas fa-boxes"></i> Loại sản phẩm</li>
-                    <li onclick="SanPham()"><i class="fas fa-barcode"></i> Sản phẩm</li>
-                    <li onclick="NhaCungCap()"><i class="fas fa-truck"></i> Nhà cung cấp</li>
-                    <li onclick="KhachHang()"><i class="fas fa-users"></i> Khách hàng</li>
-                    <li onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</li>
-                    <li onclick="HoaDonNhap()"><i class="fas fa-file-import"></i> Hóa đơn nhập</li>
-                    <li onclick="HoaDonBan()"><i class="fas fa-shopping-cart"></i> Hóa đơn bán</li>
-                    <li onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</li>
-                    <li onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</li>
-                </ul>
-            </div> -->
-            <div class="col-11 col-s-12 content">
-                <div class="col-12 col-s-12 content">
-                    <div class="tabcontent">
-                        <div class="title">
-                            <i class="fas fa-signal"></i> Hoạt động hôm nay
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 col-s-12 padding-box">
-                                <div class="box" style="background-color: #9abc32;">
-                                    <div class="box-left"><i class="fas fa-signal"></i></div>
-                                    <div class="box-right">Doanh thu<br><span>0</span>đ</div>
-                                </div>
-                            </div>
-                            <!-- <div class="col-4 col-s-12 padding-box">
-                                <div class="box" style="background-color: #6FB3E0;">
-                                    <div class="box-left"><i class="fas fa-cloud"></i></div>
-                                    <div class="box-right">
-                                        Số đơn hàng: <span>0</span><br>
-                                        Số sản phẩm: <span>0</span>
+            <div class="col-11 col-s-12 col-m-12 Details">
+                <div class="col-12 col-s-12 col-m-12 overview Page">
+                    <div class="col-12 col-s-12 col-m-12 overview1">
+                        <span  class="col-12 col-s-12 col-m-12">KẾT QUẢ KINH DOANH TRONG NGÀY</span>
+                        <div class="tabcontent">
+                            <div class="row">
+                                <div class="col-4 col-s-12 padding-box">
+                                    <div class="box" style="background-color: #9abc32;">
+                                        <div class="box-left"><i class="fas fa-signal"></i></div>
+                                        <div class="box-right">Doanh thu trong ngày: <span>0</span>đ</div>
                                     </div>
                                 </div>
-                            </div> -->
-                            <!-- <div class="col-4 col-s-12 padding-box">
-                                <div class="box" style="background-color: #D53F;">
-                                    <div class="box-left"><i class="fas fa-undo-alt"></i></div>
-                                    <div class="box-right">Khách hàng trả<br><span>0</span></div>
-                                </div>
-                            </div> -->
-                        </div>
-                        <div class="row">
-                            <div class="col-4 col-s-12 padding-box">
-                                <div class="box2" style="border: 1px solid #6FB3E0;">
-                                    <div class="box2-top" style="border-bottom: 1px solid #6FB3E0;">
-                                        <i class="fas fa-signal"></i> Hoạt động
+                                <div class="col-4 col-s-12 padding-box">
+                                    <div class="box" style="background-color: #6FB3E0;">
+                                        <div class="box-left"><i class="fas fa-cloud"></i></div>
+                                        <div class="box-right">
+                                            Số đơn hàng: <span>0</span>
+                                        </div>
                                     </div>
-                                    <div class="box2-bot">
-                                        <div class="box2-bot-left">Số đơn hàng bán</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Tiền bán hàng</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Số đơn hàng nhập</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Tiền nhập hàng</div>
-                                        <div class="box2-bot-right">0</div>
+                                </div>
+                                <div class="col-4 col-s-12 padding-box">
+                                    <div class="box" style="background-color: #D53F;">
+                                        <div class="box-left"><i class="fas fa-undo-alt"></i></div>
+                                        <div class="box-right">Số sản phẩm: <span>0</span></div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-4 col-s-12 padding-box">
-                                <div class="box2" style="border: 1px solid #E8B110;">
-                                    <div class="box2-top" style="border-bottom: 1px solid #E8B110;">
-                                        <i class="fas fa-boxes"></i> Thông tin kho
-                                    </div>
-                                    <div class="box2-bot">
-                                        <div class="box2-bot-left">Tồn kho</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Hết hàng</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Sắp hết hàng</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Vượt định mức</div>
-                                        <div class="box2-bot-right">0</div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-4 col-s-12 padding-box">
-                                <div class="box2" style="border: 1px solid #9ABC32;">
-                                    <div class="box2-top" style="border-bottom: 1px solid #9ABC32;">
-                                        <i class="fas fa-boxes"></i> Thông tin sản phẩm
-                                    </div>
-                                    <div class="box2-bot">
-                                        <div class="box2-bot-left">Sản phẩm</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Chưa làm giá bán</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Chưa nhập giá mua</div>
-                                        <div class="box2-bot-right">0</div>
-                                        <div class="box2-bot-left">Hàng chưa phân loại</div>
-                                        <div class="box2-bot-right">0</div>
-                                    </div>
-                                </div>
-                            </div> -->
+
+                        </div>
+                        <div class="chooseover">
+                            <label for="txt_over">Tổng quan về thống kê </label>
+                            <select onchange="Thongke()" id="txt_over" style="outline: none">
+                                <option value="tuan">Theo tuần</option>
+                                <option value="thang">Theo tháng</option>
+                                <option value="nam">Theo năm</option>
+                              
+                            </select>
+                        </div>
+                        <div class="col-12 col-s-12 col-m-12 sales">
+                            <div id="chartContainerTuan" style="height:400px;width: 60%; margin: auto;" > </div>
+                        </div>
+                        <div class="col-12 col-s-12 col-m-12 sales_week">
+                            <div class="money_week week1">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                                <span>Doanh thu<br><span>63.536.000đ</span></span>
+                            </div>
+                            <div class="product_week week1">
+                                <i class="fa-solid fa-file-lines"></i>
+                            <span>Đơn hàng : <span>12</span><br>
+                            <span>Sản phẩm : <span>12</span><br>
+                            </div>
+                            <div class="return_week week1">
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                                <span>Đơn hoàn trả<br><span>0</span><br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-s-12 col-m-12 sales">
+                            <div id="chartContainerthang" style="height:400px;width: 100%" > </div>
+                        </div>
+                        <div class="col-12 col-s-12 col-m-12 sales_week">
+                            <div class="money_week week1">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                                <span>Doanh thu<br><span>132.340.000đ</span></span>
+                            </div>
+                            <div class="product_week week1">
+                                <i class="fa-solid fa-file-lines"></i>
+                            <span>Đơn hàng : <span>780</span><br>
+                            <span>Sản phẩm : <span>1230</span><br>
+                            </div>
+                            <div class="return_week week1">
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                                <span>Đơn hoàn trả<br><span>15</span><br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-s-12 col-m-12 sales">
+                            <div id="chartContainer" style="height:400px;width: 100%" > </div>
+                        </div>
+                        <div class="col-12 col-s-12 col-m-12 sales_week">
+                            <div class="money_week week1">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                                <span>Doanh thu<br><span>867.000.0000đ</span></span>
+                            </div>
+                            <div class="product_week week1">
+                                <i class="fa-solid fa-file-lines"></i>
+                            <span>Đơn hàng : <span>1243</span><br>
+                            <span>Sản phẩm : <span>57656</span><br>
+                            </div>
+                            <div class="return_week week1">
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                                <span>Đơn hoàn trả<br><span>123</span><br>
+                            </div>
                         </div>
                     </div>
+                    
+                    
                 </div>
             </div>
         </div>
-        <!-- <script>
-            var user = JSON.parse(localStorage.getItem('user'));
-            if (!user) {
-                window.location.href = "../admin/login.html";
-            }
-
-            LoadUser();
-        </script> -->
     </section>
 </body>
 
