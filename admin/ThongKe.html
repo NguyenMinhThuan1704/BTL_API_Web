@@ -50,7 +50,7 @@
     </style>
 </head>
 
-<body ng-app="AppAdmin"  ng-controller="HDNController">
+<body ng-app="AppAdmin"  ng-controller="ThongKeHDNController">
     <section class="header">
         <a href="javascript:void(0);" class="icon" onclick="openBTN()">
             <i class="fas fa-bars"></i>
@@ -170,7 +170,11 @@
                                     <button ng-click="changePage(10)">10</button>
                                     <button><i class="fas fa-angle-right"></i></button>
                                 </div>
+                                <div class="col-4 col-s-12" style="float: left;">
+                                    <button id="inhoadonnhap"><a style="color: #fff; text-decoration: none;">In thống kê hóa đơn nhập</a></button>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -255,6 +259,9 @@
                                     <button ng-click="changePage(9)">9</button>
                                     <button ng-click="changePage(10)">10</button>
                                     <button><i class="fas fa-angle-right"></i></button>
+                                </div>
+                                <div class="col-4 col-s-12" style="float: left;">
+                                    <button id="inhoadonban"><a style="color: #fff; text-decoration: none;">In thống kê hóa đơn bán</a></button>
                                 </div>
                             </div>
                         </div>

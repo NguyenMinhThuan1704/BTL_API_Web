@@ -1,5 +1,5 @@
 var app = angular.module('AppAdmin', []);
-app.controller("HDNController", function ($scope, $http) {
+app.controller("ThongKeHDNController", function ($scope, $http) {
 
     $scope.listCTTK;
     $scope.GetCTTK = function () {
@@ -79,6 +79,25 @@ app.controller("HDNController", function ($scope, $http) {
         $scope.ThongKeHDN();
     });
 
+    document.getElementById('inhoadonnhap').addEventListener('click', function(){
+        var fr_ngaytao = document.getElementById('search-export-fr-hdn').value;
+        var to_ngaytao = document.getElementById('search-export-to-hdn').value;
+        var maNhanVien = document.getElementById('TenNhanVien').value;
+        var maNPP = document.getElementById('TenNPP').value;
+        maNhanVien = maNhanVien.trim() === "" ? 0 : maNhanVien;
+        maNPP = maNPP.trim() === "" ? 0 : maNPP;
+        if (fr_ngaytao === '' || to_ngaytao === '') {
+            alert('Vui lòng nhập thời gian cần thống kê.');
+        } else {
+            var urlToOpen = 'InThongKeHDN.html' +
+                    '?fr_ngaytao=' + encodeURIComponent(fr_ngaytao) +
+                    '&to_ngaytao=' + encodeURIComponent(to_ngaytao) +
+                    '&maNhanVien=' + encodeURIComponent(maNhanVien) +
+                    '&maNPP=' + encodeURIComponent(maNPP);
+            window.location.href = urlToOpen;
+        }
+    });
+
     document.getElementById('btnSearch2').addEventListener('click', function() {
         $scope.listHDB;
         $scope.page = 1;
@@ -122,6 +141,22 @@ app.controller("HDNController", function ($scope, $http) {
             }
         };
         $scope.ThongKeHDB();
+    });
+
+    document.getElementById('inhoadonban').addEventListener('click', function(){
+        var fr_ngaytao = document.getElementById('search-export-fr-hdb').value;
+        var to_ngaytao = document.getElementById('search-export-to-hdb').value;
+        var tenkh = $scope.tenkh;
+        tenkh = (tenkh ?? "").trim();
+        if (fr_ngaytao === '' || to_ngaytao === '') {
+            alert('Vui lòng nhập thời gian cần thống kê.');
+        } else {
+            var urlToOpen = 'InThongKeHDB.html' +
+                    '?fr_ngaytao=' + encodeURIComponent(fr_ngaytao) +
+                    '&to_ngaytao=' + encodeURIComponent(to_ngaytao) +
+                    '&tenkh=' + encodeURIComponent(tenkh);
+            window.location.href = urlToOpen;
+        }
     });
 });
 

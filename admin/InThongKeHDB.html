@@ -13,11 +13,15 @@
 
         table {
             margin-top: 15px;
+            margin-bottom: 50px;
             width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
         }
 
         body {
-            width: 900px;
+            width: 1200px;
+            height: auto;
             margin: 0 auto;
         }
 
@@ -25,12 +29,11 @@
             line-height: 27px;
         }
 
-        table,
         th,
         td {
             border: 1px solid black;
             border-collapse: collapse;
-            text-align: center;
+            padding-left: 8px;
         }
 
         .ngay {
@@ -74,52 +77,54 @@
     <script src="./js/globalAD.js"></script>
 </head>
 
-<body ng-app="AppAdmin" ng-controller="HDNController" ng-init="inHoaDon()">
+<body ng-app="AppAdmin" ng-controller="InThongKeHDBController" ng-init="inHoaDon()" style="margin-bottom: 300px;">
     <section style="text-align: center; margin: 25px 0;">
-        <h1>HÓA ĐƠN NHẬP HÀNG</h1>
+        <h1>THỐNG KÊ HÓA ĐƠN BÁN HÀNG</h1>
     </section>
 
-    <div class="le dam">Tên đơn vị nhập hàng: NMT Decorative Lights</div>
+    <div class="le dam">Tên đơn vị bán hàng: NMT Decorative Lights</div>
     <div class="le">Mã số thuế: 123456789</div>
     <div class="le">Địa chỉ: Toàn thắng, Kim động , Hưng yên</div>
     <div class="le doi">Điện thoại: 0929.884.753</div>
     <div class="le doi">Số tài khoản: 123456789</div>
-    <div class="le dam">Nhân viên nhập: {{listBill.hoTen}}</div>
-    <div class="le dam">Nhà cung cấp: {{listBill.tenNhaPhanPhoi}}</div>
-    <div class="le">Điện thoại: {{listBill.soDienThoai}}</div>
-    <div class="le">Địa chỉ: {{listBill.diaChi}}</div>
-    <div class="le doi">Số tài khoản: 526716147626186</div>
+    <div class="le dam">Từ ngày: {{fr_ngaytao}}</div>
+    <div class="le dam">Đến này: {{to_ngaytao}}</div>
+    <div class="le doi dam">Số lượng bản ghi: {{totalItems_hdb}}</div>
     <div class="le">Ghi chú: </div>
-    <div class="le">Kiểu thanh toán: {{listBill.kieuThanhToan}}</div>
+    <div class="le dam">Số lượng sản phẩm đã bán: {{totalQuantity_hdb}}</div>
+    <div class="le">Số tài khoản: 526716147626186</div>
+
 
     <table>
-
         <tr style="background: #095b87; color: #fff;">
-            <th>Id</th>
+            <th>Tên khách hàng</th>
+            <th>Địa chỉ</th>
             <th>Tên sản phẩm</th>
-            <th>Số lượng</th>
-            <th>Giá nhập</th>
-            <th>Tổng tiền</th>
+            <th style="text-align: center; padding: 0;">Số lượng</th>
+            <th>Ngày tạo</th>
+            <th style="text-align: center; padding: 0;">Tổng tiền</th>
         </tr>
-        <tr ng-repeat="x in detailBill">
-            <td>{{x.maCTHDN}}</td>
-            <td>{{x.tenSanPham}}</td>
-            <td>{{x.soLuong}}</td>
-            <td>{{x.giaNhap}}</td>
-            <td>{{x.tongTien}}</td>
+        <tr ng-repeat="hdb in listHDB">
+            <td>{{hdb.tenKH}}</td>
+            <td>{{hdb.diachi}}</td>
+            <td>{{hdb.tenSanPham}}</td>
+            <td style="text-align: center; padding: 0;">{{hdb.soLuong}}</td>
+            <td>{{hdb.ngayTao}}</td>
+            <td style="text-align: center; padding: 0;">{{hdb.tongGia}}</td>
         </tr>
 
         <tr> 
-            <td colspan= "4" class="dam">Tổng tiền hóa đơn nhập</td>
-            <td class="dam">{{listBill.tongTien}}</td>
+            <td colspan= "5" class="dam" style="text-align: center;">Tổng tiền hóa đơn bán</td>
+            <td class="dam">{{totalAmount_hdb}}</td>
         </tr>
     </table>
-    <div class="doi dam ky">Người mua hàng</div>
-    <div class="doi dam ky">Người bán hàng</div>
+
+    <div class="doi dam ky">Xác nhận của cấp trên</div>
+    <div class="doi dam ky">Người làm thống kê</div>
     <div class="doi ky1">(Ký, ghi rõ họ tên)</div>
     <div class="doi ky1">(Ký, ghi rõ họ tên)</div>
 </body>
 
-<script src="./js/hoadonnhap.js"></script>
+<script src="./js/inThongKeHDB.js"></script>
 
 </html>
