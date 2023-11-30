@@ -1,7 +1,7 @@
 var app = angular.module('AppAdmin', []);
 app.controller("HDNController", function ($scope, $http, $timeout) {
+
     $scope.cthdn;
-    
     $scope.GetCTHDN = function () {
         var key = 'id';
 		var value = window.location.search.substring(window.location.search.indexOf(key)+key.length+1);	
@@ -11,7 +11,6 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
                 invoiceDetailsElement.style.display = 'none';
             }
         } else {
-            // Ngược lại, hiển thị thẻ
             var invoiceDetailsElement = document.getElementById('invoiceDetails');
             if (invoiceDetailsElement) {
                 invoiceDetailsElement.style.display = 'block';
@@ -27,7 +26,6 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
             $scope.cthdn = response.data.data;
         });
     };
-    
     $scope.GetCTHDN();
     
 
@@ -85,7 +83,6 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
   $scope.calculateTotalPriceForItem = function (item) {
     var giaNhap = item.giaGiam - (item.giaGiam * 0.2);
     
-    // Tính tổng giá
     return giaNhap * item.soLuong;
   };
 
@@ -145,9 +142,40 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
     $scope.toggleDetails = function(hdn) {
         hdn.showAllDetails = !hdn.showAllDetails;
     };
+
+    document.getElementById('btnSearch').addEventListener('click', function() {
+        $scope.listHDN;
+        $scope.page = 1;
+        $scope.changePage = function (pageNum) {
+            $scope.page = pageNum;
+            $scope.GetHDN();
+        };
+    
+        $scope.GetHDN = function () {
+            var maNhanVien = document.getElementById('TenNhanVien1').value;
+            var maNPP = document.getElementById('TenNPP1').value;
+            var mahdn = document.getElementById('mahdn').value;
+            maNhanVien = maNhanVien.trim() === "" ? 0 : maNhanVien;
+            maNPP = maNPP.trim() === "" ? 0 : maNPP;
+            mahdn = mahdn.trim() === "" ? 0 : mahdn;
+            $http({
+                method: 'POST',
+                data: {
+                    page: $scope.page,
+                    pageSize: 10,
+                    ma_hdn: mahdn,
+                    ma_nv: maNhanVien,
+                    ma_npp: maNPP,
+                },
+                url: current_url_ad + '/api/HoaDonNhap/searchHDN',
+            }).then(function (response) {
+                $scope.listHDN = response.data.data;
+            });
+        };
+        $scope.GetHDN();
+    });
     
 
-   // Hàm chuẩn bị dữ liệu và gọi API để thêm vào CSDL
    $scope.addHoaDonNhapCSDL = function () {
     var maNhanVien = document.getElementById('TenNhanVien').value;
     var maNhaPhanPhoi = document.getElementById('TenNPP').value;
@@ -156,7 +184,6 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
       return alert("Thông tin nhập thiếu! Vui lòng kiểm tra lại");
     }
 
-    // Tạo dữ liệu cần gửi qua API
     var dataToSend = {
         maNhaPhanPhoi: $scope.nhaPhanPhoi,
         maTaiKhoan: maNhanVien,
@@ -187,10 +214,6 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
         alert("Thêm hóa đơn nhập thành công!")
         localStorage.removeItem('cartAdmin');
         location.reload();
-    },
-    function (error) {
-        console.error("Error:", error);
-        alert("Có lỗi xảy ra khi thêm hóa đơn nhập. Vui lòng kiểm tra lại.");
     });
   };
 
@@ -231,37 +254,99 @@ app.controller("HDNController", function ($scope, $http, $timeout) {
         }	
     };
 
-//-----------------------------IN HÓA ĐƠN NHẬP--------------------------------
-    $scope.maHoaDon;
-    $scope.listBill;
-    $scope.detailBill = [];
-    $scope.getDetailBill = function() {
-        var key = 'id';
-		var maHoaDon = window.location.search.substring(window.location.search.indexOf(key)+key.length+1);		
-        // var urlParams = new URLSearchParams(window.location.search);
-        // var maHoaDon = urlParams.get("id"); 
-        $http({
-        method: "GET",
-        url: current_url_ad + '/api/HoaDonNhap/get-by-id/'+ maHoaDon,
-        // url: current_url_ad + '/api/HoaDonNhap/get-by-id/6',
-        }).then(function (response) {
-        console.log(response.data);
-        $scope.listBill = response.data;
-        $scope.detailBill = $scope.listBill.list_json_chitiethoadonnhap;
-        $scope.maHoaDon = maHoaDon;
-        });
-    }
-    $scope.getDetailBill();
+   $scope.updateHoaDonNhapCSDL = function () {
+    var maNhanVien = document.getElementById('TenNhanVien').value;
+    var maNhaPhanPhoi = document.getElementById('TenNPP').value;
+    var ghichu = document.getElementById("ghichu").value;
+    var kieuThanhToan = document.getElementById('KieuThanhToan').value;
+    var maHDN = document.getElementById('MaHDN').value;
+    var maCTHDN = document.getElementById('MaCTHDN').value;
+    var donViTinh = document.getElementById('donViTinh').value;
 
-    $scope.print = function () {
-        window.location.href = "InHoaDonNhap.html?id=" + $scope.maHoaDon;
-        // window.location.href = "InHoaDonNhap.html?id=4";
-        
+    console.log(ghichu);
+    console.log(maCTHDN);
+    console.log(maHDN);
+    console.log(maNhaPhanPhoi);
+    console.log(maNhanVien);
+    console.log(kieuThanhToan);
+
+    if (!maNhanVien || !maNhaPhanPhoi|| !ghichu|| !kieuThanhToan) {
+      return alert("Thông tin nhập thiếu! Vui lòng kiểm tra lại");
+    }
+
+    var dataToSend = {
+        maHoaDonNhap: maHDN,
+        maNhaPhanPhoi: maNhaPhanPhoi,
+        maTaiKhoan: maNhanVien,
+        kieuThanhToan: kieuThanhToan,
+        list_json_chitiethoadonnhap: []
     };
-    $scope.inHoaDon = function () {
-        $timeout(function () {
-            window.print();
-        }, 2000);
-    };
+
+    // Lặp qua danh sách sản phẩm trong giỏ hàng và thêm vào list_json_chitiethoadonnhap
+    for (var i = 0; i < $scope.cartItems.length; i++) {
+        var item = $scope.cartItems[i];
+        var maCTHDN = $scope.cartItems[i].maCTHDN;
+        var chiTietHoaDonNhap = {
+            maCTHDN: maCTHDN,
+            maSanPham: item.maSanPham,
+            soLuong: item.soLuong,
+            donViTinh: donViTinh,
+            giaNhap: $scope.giaNhap(item),
+            tongTien: $scope.calculateTotalPriceForItem(item),
+            ghiChu: ghichu
+        };
+        dataToSend.list_json_chitiethoadonnhap.push(chiTietHoaDonNhap);
+      }
+
+    $http({
+        method: 'POST',
+        data: dataToSend,
+        url: current_url_ad + '/api/HoaDonNhap/update-hoadonnhap',
+    }).then(function (response) {
+        console.log(response.data);
+        alert("Cập nhật hóa đơn nhập thành công!")
+        localStorage.removeItem('cartAdmin');
+        location.reload();
+    });
+  };
 });
 
+document.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.classList.contains('fa-trash-alt')) {
+
+        var maHDN = target.getAttribute('data-mahdn');
+
+        var xacNhan = confirm("Bạn có chắc chắn muốn xóa hóa đơn nhập này?");
+
+        if (xacNhan) {
+            XoaHDN(maHDN);
+        }
+    }
+});
+
+function XoaHDN(maHDN) {
+    fetch(current_url_ad + '/api/HoaDonNhap/delete/' + maHDN, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Xóa hóa đơn nhập thành công!');
+            location.reload();
+        } else {
+            // Xử lý lỗi nếu cần
+        }
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+    });
+}
+
+function NhapMoi() {
+    localStorage.removeItem('cartAdmin');
+    location.reload();
+}

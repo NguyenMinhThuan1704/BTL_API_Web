@@ -47,8 +47,6 @@
                 <button onclick="TinTuc()"><i class="fas fa-newspaper"></i> Tin tức</button>
                 <button onclick="TaiKhoan()"><i class="fas fa-user"></i> Tài khoản</button>
                 <button onclick="ThongKe()"><i class="fa-solid fa-chart-column"></i> Thống kê</button>
-
-                <!-- <button onclick="ThietLap()"><i class="fas fa-cogs"></i> Thiết lập</button> -->
             </div>
             <div class="col-11 col-s-12 content">
                 <div class="col-5 col-s-12 content">
@@ -111,6 +109,8 @@
                         ng-click="addHoaDonNhapCSDL()">Thêm hóa đơn nhập</button>
                         <button class="btn-form" style="background-color: rgba(227, 32, 21, 0.8);"
                             onclick="NhapMoi()">Nhập mới</button>
+                        <button class="btn-form" style="background-color: rgba(14, 87, 224, 0.8);" id="btnUpdate"
+                        ng-click="updateHoaDonNhapCSDL()">Cập nhật thông tin</button>
                     </div>
                 </div>
                 <div class="col-7 col-s-12 content">
@@ -127,6 +127,7 @@
                                             <img ng-src=".{{item.anhDaiDien}}" alt="" class="img">
                                         </a>
                                     </div>
+                                    
                                     <div class="col c-10 product__thongtin">
                                         <div class="name-cart">
                                             <span>{{item.tenSanPham}}</span>
@@ -146,6 +147,14 @@
                                                     </div>
                               
                                                     <div class="bt_quantity_update quantity_up" ng-click="incrementQuantity(item)">+</div>
+                                                </div>
+                                                <div id="note">
+                                                    <div class="number__left">Ghi chú:</div>
+                                                    <select name="ghichu" id="ghichu">
+                                                        <option value="1">Thêm</option>
+                                                        <option value="2">Sửa</option>
+                                                        <option value="3">Xóa</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col c-7" style="display: flex; align-items: center;">
@@ -187,11 +196,23 @@
                         <hr>
                     </div>
                     <div class="row">
-                        <div class="col-10 col-s-12 padding-box">
-                            <input type="text" id="search-export" placeholder="Nhập mã hóa đơn bán...">
+                        <div class="col-2 col-s-12 padding-box">
+                            <input type="text" id="mahdn" placeholder="Nhập mã hóa đơn nhập...">
+                        </div>
+                        <div class="col-4 col-s-12 padding-box">
+                            <select name="nhanvien" id="TenNhanVien1" ng-model="nhanVien1">
+                                <option value="">--Chọn nhân viên--</option>
+                                <option ng-repeat="nv in listCTTK" value="{{nv.maTaiKhoan}}">{{nv.maTaiKhoan}} - {{nv.hoTen}}</option>
+                            </select>
+                        </div>
+                        <div class="col-4 col-s-12 padding-box">
+                            <select name="npp" id="TenNPP1" ng-model="nhaPhanPhoi1">
+                                <option value="">--Chọn nhà cung cấp--</option>
+                                <option ng-repeat="npp in listNPP" value="{{npp.maNhaPhanPhoi}}">{{npp.maNhaPhanPhoi}} - {{npp.tenNhaPhanPhoi}}</option>
+                            </select>
                         </div>
                         <div class="col-2 col-s-12 padding-box">
-                            <button><i class="fas fas fa-search"></i> Tìm kiếm</button>
+                            <button id="btnSearch"><i class="fas fas fa-search"></i> Tìm kiếm</button>
                         </div>
                     </div>
                     <div class="row">
@@ -205,6 +226,7 @@
                                         <th>Nhà phân phối</th>
                                         <th>Kiểu thanh toán</th>
                                         <th>Tổng tiền</th>
+                                        <th>Thao tác</th>
                                         <!-- <th>List chi tiết hóa đơn</th> -->
                                     </tr>
                                 </thead>
@@ -232,7 +254,7 @@
                                             <i class="fas fa-edit" title="Sửa" ng-click="editHoaDonNhap(hdn)"></i>
                                             <i class="fas fa-trash-alt" title="Xóa" data-mahdn="{{hdn.maHoaDonNhap}}"></i>
                                             <a href="?id={{hdn.maHoaDonNhap}}" class="detail" id="myLink" ng-click="toggleInvoiceDetails()" data-mahdn="{{hdn.maHoaDonNhap}}" style="cursor: pointer;">Xem chi tiết hóa đơn {{hdn.maHoaDonNhap}}</a>
-                                            <a href="./InHoaDonNhap.html?id={{hdn.maHoaDonNhap}}" style="padding-left: 4px; border-left: 1px solid #6b6868;" class="detail" ng-click="print()">In hóa đơn</a>
+                                            <a href="./InHoaDonNhap.html?id={{hdn.maHoaDonNhap}}" style="padding-left: 4px; border-left: 1px solid #6b6868;" class="detail">In hóa đơn</a>
                                         </td>
                                     </tr>
                                 </tbody>
