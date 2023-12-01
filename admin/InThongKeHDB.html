@@ -110,12 +110,12 @@
             <td>{{hdb.tenSanPham}}</td>
             <td style="text-align: center; padding: 0;">{{hdb.soLuong}}</td>
             <td>{{hdb.ngayTao}}</td>
-            <td style="text-align: center; padding: 0;">{{hdb.tongGia}}</td>
+            <td style="text-align: center; padding: 0;">{{hdb.tongGia | number}}</td>
         </tr>
 
         <tr> 
             <td colspan= "5" class="dam" style="text-align: center;">Tổng tiền hóa đơn bán</td>
-            <td class="dam">{{totalAmount_hdb}}</td>
+            <td class="dam">{{totalAmount_hdb | number}}</td>
         </tr>
     </table>
 

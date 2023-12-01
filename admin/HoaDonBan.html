@@ -133,10 +133,10 @@
                                             <div class="col c-7" style="display: flex; align-items: center;">
                                               <div class="price" style="margin-right: 16px;">
                                                     <div>
-                                                        Giá bán: <span>{{item.giaGiam}}<sup>đ</sup></span>
+                                                        Giá bán: <span>{{item.giaGiam | number}}<sup>đ</sup></span>
                                                     </div>
                                                     <div>
-                                                        Tổng giá:<span> {{item.tongGia}}<sup>đ</sup></span>
+                                                        Tổng giá:<span> {{item.tongGia | number}}<sup>đ</sup></span>
                                                     </div>
                                               </div>
                                             </div>
@@ -188,7 +188,7 @@
                                             <td>{{hdb.tenKH}}</td>
                                             <td>{{hdb.diaChi}}</td> 
                                             <td>{{hdb.sdt}}</td>
-                                            <td>{{hdb.tongGia}}</td>
+                                            <td>{{hdb.tongGia | number}}</td>
                                             <td style="text-align: center;">
                                                 <i class="fas fa-edit" title="Sửa" ng-click="editHoaDonBan(hdb)"> Xem chi tiết hóa đơn {{hdb.maHoaDon}}</i>
                                                 <i class="fas fa-trash-alt" title="Xóa" data-mahdb="{{hdb.maHoaDon}}"></i>

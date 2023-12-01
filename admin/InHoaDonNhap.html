@@ -105,13 +105,13 @@
             <td>{{x.maCTHDN}}</td>
             <td>{{x.tenSanPham}}</td>
             <td>{{x.soLuong}}</td>
-            <td>{{x.giaNhap}}</td>
-            <td>{{x.tongTien}}</td>
+            <td>{{x.giaNhap | number}}</td>
+            <td>{{x.tongTien | number}}</td>
         </tr>
 
         <tr> 
             <td colspan= "4" class="dam">Tổng tiền hóa đơn nhập</td>
-            <td class="dam">{{listBill.tongTien}}</td>
+            <td class="dam">{{listBill.tongTien | number}}</td>
         </tr>
     </table>
     <div class="doi dam ky">Người mua hàng</div>

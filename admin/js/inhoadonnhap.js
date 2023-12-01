@@ -11,7 +11,6 @@ app.controller("inHDNController", function ($scope, $http, $timeout) {
         method: "GET",
         url: current_url_ad + '/api/HoaDonNhap/get-by-id/'+ maHoaDon,
         }).then(function (response) {
-        console.log(response.data);
         $scope.listBill = response.data;
         $scope.detailBill = $scope.listBill.list_json_chitiethoadonnhap;
         $scope.maHoaDon = maHoaDon;

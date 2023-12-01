@@ -156,7 +156,7 @@
                             </div>
                             <div class="col-6 col-s-12 padding-box">
                                 <select name="loaisp" id="TenLoaiSanPham1" ng-model="selectedSP1">
-                                    <option value="">--Chọn loại sản phẩm--</option>
+                                    <option value="">--Chọn loại sản ph ẩm--</option>
                                     <option ng-repeat="lsp in listLSP" value="{{lsp.maLoaiSanPham}}">{{lsp.maLoaiSanPham}} - {{lsp.tenLoaiSanPham}}</option>
                                 </select>
                             </div>
@@ -191,8 +191,8 @@
                                                 <img src=".{{sp.anhDaiDien}}" alt="">
                                                 <!-- {{sp.anhDaiDien}} -->
                                             </td>
-                                            <td>{{sp.gia}}</td>
-                                            <td>{{sp.giaGiam}}</td>
+                                            <td>{{sp.gia | number}}</td>
+                                            <td>{{sp.giaGiam | number}}</td>
                                             <td>{{sp.soLuong}}</td>
                                             <td>{{sp.trangThai}}</td>
                                             <td style="text-align: center;">

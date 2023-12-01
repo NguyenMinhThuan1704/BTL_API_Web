@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/style_mainQT.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="../assets/css/core.css">
+    <link rel="stylesheet" href="../assets/css/giohang.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
     <script src="../assets/js/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/angular.min.js"></script>
@@ -21,12 +22,12 @@
 </head>
 
 <body ng-app="AppAdmin"  ng-controller="TongQuanCtrl">
-    <section class="header">
+    <section class="header" style="background-color: #ffbe00;" >
         <a href="javascript:void(0);" class="icon" onclick="openBTN()">
             <i class="fas fa-bars"></i>
         </a>
         <div class="box-login" id="box-t">
-            Xin chào, <span id="ten_nv">{{tk.tenTaiKhoan}}</span> <i class="fas fa-sort-down"></i>
+            Xin chào, <span id="ten_nv">Admin {{tk.tenTaiKhoan}}</span> <i class="fas fa-sort-down"></i>
             <div class="box-login-bottom" id="box-b">
                 <button onclick="TTTaiKhoan()"><i class="fas fa-user-alt"></i> Tài khoản</button>
                 <button onclick="LogOut();"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
@@ -50,31 +51,35 @@
             <div class="col-11 col-s-12 col-m-12 Details">
                 <div class="col-12 col-s-12 col-m-12 overview Page">
                     <div class="col-12 col-s-12 col-m-12 overview1">
-                        <span  class="col-12 col-s-12 col-m-12">KẾT QUẢ KINH DOANH TRONG NGÀY</span>
+                        <span class="col-12 col-s-12 col-m-12">KẾT QUẢ KINH DOANH TRONG NGÀY</span>
                         <div class="tabcontent">
                             <div class="row">
                                 <div class="col-4 col-s-12 padding-box">
                                     <div class="box" style="background-color: #9abc32;">
                                         <div class="box-left"><i class="fas fa-signal"></i></div>
-                                        <div class="box-right">Doanh thu trong ngày: <span>0</span>đ</div>
+                                        <div class="box-right">Doanh thu trong ngày:</div>
+                                        <span>{{ listTKe_date.doanhThu | number }}</span>đ
                                     </div>
                                 </div>
                                 <div class="col-4 col-s-12 padding-box">
                                     <div class="box" style="background-color: #6FB3E0;">
                                         <div class="box-left"><i class="fas fa-cloud"></i></div>
                                         <div class="box-right">
-                                            Số đơn hàng: <span>0</span>
+                                            Số đơn hàng bán: <span>{{ listTKe_date.soDonHangBan }}</span>
+                                        </div>
+                                        <div class="box-right">
+                                            Số sản phẩm đã bán: <span>{{ listTKe_date.soSanPhamBan }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4 col-s-12 padding-box">
                                     <div class="box" style="background-color: #D53F;">
                                         <div class="box-left"><i class="fas fa-undo-alt"></i></div>
-                                        <div class="box-right">Số sản phẩm: <span>0</span></div>
+                                        <div class="box-right">Số đơn hàng nhập: <span>{{ listTKe_date.soDonHangNhap }}</span></div>
+                                        <div class="box-right">Số sản phẩm mới nhập: <span>{{ listTKe_date.soSanPhamNhap }}</span></div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </div>                            
                         </div>
                         <div class="chooseover">
                             <label for="txt_over">Tổng quan về thống kê </label>
@@ -91,16 +96,17 @@
                         <div class="col-12 col-s-12 col-m-12 sales_week">
                             <div class="money_week week1">
                                 <i class="fa-solid fa-sack-dollar"></i>
-                                <span>Doanh thu<br><span>63.536.000đ</span></span>
+                                <span>Doanh thu<br><span>{{ listTKe_week.doanhThu | number }}đ</span></span>
                             </div>
                             <div class="product_week week1">
                                 <i class="fa-solid fa-file-lines"></i>
-                            <span>Đơn hàng : <span>12</span><br>
-                            <span>Sản phẩm : <span>12</span><br>
+                                <span>Đơn hàng bán: <span>{{ listTKe_week.soDonHangBan }}</span><br>
+                                <span>Sản phẩm bán: <span>{{ listTKe_week.soSanPhamBan }}</span><br>
                             </div>
                             <div class="return_week week1">
                                 <i class="fa-solid fa-arrow-rotate-left"></i>
-                                <span>Đơn hoàn trả<br><span>0</span><br>
+                                <span>Số đơn hàng nhập: <span>{{ listTKe_week.soDonHangNhap }}</span><br>
+                                <span>Số sản phẩm mới nhập: <span>{{ listTKe_week.soSanPhamNhap }}</span><br>
                             </div>
                         </div>
                         <div class="col-12 col-s-12 col-m-12 sales">
@@ -109,16 +115,17 @@
                         <div class="col-12 col-s-12 col-m-12 sales_week">
                             <div class="money_week week1">
                                 <i class="fa-solid fa-sack-dollar"></i>
-                                <span>Doanh thu<br><span>132.340.000đ</span></span>
+                                <span>Doanh thu<br><span>{{ listTKe_month.doanhThu | number }}đ</span></span>
                             </div>
                             <div class="product_week week1">
                                 <i class="fa-solid fa-file-lines"></i>
-                            <span>Đơn hàng : <span>780</span><br>
-                            <span>Sản phẩm : <span>1230</span><br>
+                                <span>Đơn hàng bán: <span>{{ listTKe_month.soDonHangBan }}</span><br>
+                                <span>Sản phẩm bán: <span>{{ listTKe_month.soSanPhamBan }}</span><br>
                             </div>
                             <div class="return_week week1">
                                 <i class="fa-solid fa-arrow-rotate-left"></i>
-                                <span>Đơn hoàn trả<br><span>15</span><br>
+                                <span>Số đơn hàng nhập: <span>{{ listTKe_month.soDonHangNhap }}</span><br>
+                                <span>Số sản phẩm mới nhập: <span>{{ listTKe_month.soSanPhamNhap }}</span><br>
                             </div>
                         </div>
                         <div class="col-12 col-s-12 col-m-12 sales">
@@ -127,21 +134,70 @@
                         <div class="col-12 col-s-12 col-m-12 sales_week">
                             <div class="money_week week1">
                                 <i class="fa-solid fa-sack-dollar"></i>
-                                <span>Doanh thu<br><span>867.000.0000đ</span></span>
+                                <span>Doanh thu<br><span>{{ listTKe_year.doanhThu | number }}đ</span></span>
                             </div>
                             <div class="product_week week1">
                                 <i class="fa-solid fa-file-lines"></i>
-                            <span>Đơn hàng : <span>1243</span><br>
-                            <span>Sản phẩm : <span>57656</span><br>
+                                <span>Đơn hàng bán: <span>{{ listTKe_year.soDonHangBan }}</span><br>
+                                <span>Sản phẩm bán: <span>{{ listTKe_year.soSanPhamBan }}</span><br>
                             </div>
                             <div class="return_week week1">
                                 <i class="fa-solid fa-arrow-rotate-left"></i>
-                                <span>Đơn hoàn trả<br><span>123</span><br>
+                                <span>Số đơn hàng nhập: <span>{{ listTKe_year.soDonHangNhap }}</span><br>
+                                <span>Số sản phẩm mới nhập: <span>{{ listTKe_year.soSanPhamNhap }}</span><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-s-12 padding-box">
+                                <div class="box2" style="border: 1px solid #E8B110;">
+                                    <div class="box2-top" style="border-bottom: 1px solid #E8B110;">
+                                        <i class="fas fa-boxes"></i> Sản phẩm bán chạy nhất
+                                    </div>
+                                    <div class="box2-bot row">
+                                        <div class="col c-12" ng-repeat="bcn in banchaynhat" style="padding: 0; margin-top: 12px; display: flex;">
+                                            <div class="col c-2 product__img" >
+                                                <a href="" class="product__img-link">
+                                                    <img ng-src=".{{bcn.anhDaiDien}}" alt="" class="img">
+                                                </a>
+                                            </div>
+                                            
+                                            <div class="col c-10 product__thongtin">
+                                                <div class="name-cart">
+                                                    <span>{{bcn.tenSanPham}}</span>
+                                                </div>
+            
+                                                <div><span>Mã sản phẩm : <b>{{bcn.maSanPham}}</b></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-s-12 padding-box">
+                                <div class="box2" style="border: 1px solid #E8B110;">
+                                    <div class="box2-top" style="border-bottom: 1px solid #E8B110;">
+                                        <i class="fas fa-boxes"></i> Sản phẩm mới nhất
+                                    </div>
+                                    <div class="box2-bot row">
+                                        <div class="col c-12" ng-repeat="item in sanphammoinhat" style="padding: 0; margin-top: 12px; display: flex;">
+                                            <div class="col c-2 product__img" >
+                                                <a href="" class="product__img-link">
+                                                    <img ng-src=".{{item.anhDaiDien}}" alt="" class="img">
+                                                </a>
+                                            </div>
+                                            
+                                            <div class="col c-10 product__thongtin">
+                                                <div class="name-cart">
+                                                    <span>{{item.tenSanPham}}</span>
+                                                </div>
+            
+                                                <div><span>Mã sản phẩm : <b>{{item.maSanPham}}</b></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>

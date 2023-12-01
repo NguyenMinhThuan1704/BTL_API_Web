@@ -139,7 +139,7 @@
                                         <td>{{hdn.tenSanPham}}</td>
                                         <td>{{hdn.soLuong}}</td>
                                         <td>{{hdn.ngayTao}}</td>
-                                        <td>{{hdn.tongTien}}</td>
+                                        <td>{{hdn.tongTien | number}}</td>
                                     
                                     </tr>
                                 </tbody>
@@ -152,7 +152,7 @@
                             Số lượng sản phẩm đã nhập: <span ng-class="{ 'red-text': totalQuantity_hdn > 0 }">{{totalQuantity_hdn}}</span>
                         </div>
                         <div class="col-12 col-s-12 padding-box">
-                            Tổng tiền: <span ng-class="{ 'red-text': totalAmount_hdn > 0 }">{{totalAmount_hdn}}</span>
+                            Tổng tiền: <span ng-class="{ 'red-text': totalAmount_hdn > 0 }">{{totalAmount_hdn | number}}</span>
                         </div>
                         <div class="col-12 col-s-12 padding-box">
                             <div class="box-sum">
@@ -229,7 +229,7 @@
                                         <td>{{hdb.tenSanPham}}</td>
                                         <td>{{hdb.soLuong}}</td>
                                         <td>{{hdb.ngayTao}}</td>
-                                        <td>{{hdb.tongGia}}</td>
+                                        <td>{{hdb.tongGia | number}}</td>
                                     
                                     </tr>
                                 </tbody>
@@ -242,7 +242,7 @@
                             Số lượng sản phẩm đã bán: <span ng-class="{ 'red-text': totalQuantity_hdb > 0 }">{{totalQuantity_hdb}}</span>
                         </div>
                         <div class="col-12 col-s-12 padding-box">
-                            Tổng tiền: <span ng-class="{ 'red-text': totalAmount_hdb > 0 }">{{totalAmount_hdb}}</span>
+                            Tổng tiền: <span ng-class="{ 'red-text': totalAmount_hdb > 0 }">{{totalAmount_hdb | number}}</span>
                         </div>
                         <div class="col-12 col-s-12 padding-box">
                             <div class="box-sum">

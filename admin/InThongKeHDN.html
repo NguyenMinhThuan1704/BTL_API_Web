@@ -111,13 +111,13 @@
             <td>{{hdn.tenSanPham}}</td>
             <td style="text-align: center; padding: 0;">{{hdn.soLuong}}</td>
             <td>{{hdn.ngayTao}}</td>
-            <td style="text-align: center; padding: 0;">{{hdn.tongTien}}</td>
+            <td style="text-align: center; padding: 0;">{{hdn.tongTien | number}}</td>
         
         </tr>
 
         <tr> 
             <td colspan= "5" class="dam" style="text-align: center;">Tổng tiền hóa đơn nhập</td>
-            <td class="dam">{{totalAmount_hdn}}</td>
+            <td class="dam">{{totalAmount_hdn | number}}</td>
         </tr>
     </table>
 

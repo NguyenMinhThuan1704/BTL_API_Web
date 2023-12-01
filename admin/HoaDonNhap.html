@@ -160,10 +160,10 @@
                                             <div class="col c-7" style="display: flex; align-items: center;">
                                               <div class="price" style="margin-right: 16px;">
                                                     <div>
-                                                        Giá nhập: <span>{{giaNhap(item)}}<sup>đ</sup></span>
+                                                        Giá nhập: <span>{{giaNhap(item) | number}}<sup>đ</sup></span>
                                                     </div>
                                                     <div>
-                                                        Tổng giá:<span> {{calculateTotalPriceForItem(item)}}<sup>đ</sup></span>
+                                                        Tổng giá:<span> {{calculateTotalPriceForItem(item) | number}}<sup>đ</sup></span>
                                                     </div>
                                               </div>
                                               <a href="" class="delete" ng-click="confirmDelete(item)">
@@ -207,7 +207,7 @@
                         </div>
                         <div class="col-4 col-s-12 padding-box">
                             <select name="npp" id="TenNPP1" ng-model="nhaPhanPhoi1">
-                                <option value="">--Chọn nhà cung cấp--</option>
+                                <option value="">--Chọn nhà phân phối--</option>
                                 <option ng-repeat="npp in listNPP" value="{{npp.maNhaPhanPhoi}}">{{npp.maNhaPhanPhoi}} - {{npp.tenNhaPhanPhoi}}</option>
                             </select>
                         </div>
@@ -237,19 +237,7 @@
                                         <td>{{hdn.hoTen}}</td>
                                         <td>{{hdn.tenNhaPhanPhoi}}</td>
                                         <td>{{hdn.kieuThanhToan}}</td>
-                                        <td>{{hdn.tongTien}}</td>
-                                        <!-- <td>{{hdn.list_json_chitiethdn}}</td> -->
-                                        <!-- <td>
-                                            <div ng-if="hdn.showAllDetails">
-                                                {{hdn.list_json_chitiethdn}}
-                                            </div>
-                                            <div ng-if="!hdn.showAllDetails">
-                                                <div ng-repeat="chitiet in hdn.list_json_chitiethdn | limitTo:1">
-                                                    {{chitiet}}
-                                                </div>
-                                                <span style="text-decoration: underline; cursor: pointer;" ng-click="toggleDetails(hdn)">Xem thêm</span>
-                                            </div>
-                                        </td> -->
+                                        <td>{{hdn.tongTien | number}}</td>
                                         <td style="text-align: center;">
                                             <i class="fas fa-edit" title="Sửa" ng-click="editHoaDonNhap(hdn)"></i>
                                             <i class="fas fa-trash-alt" title="Xóa" data-mahdn="{{hdn.maHoaDonNhap}}"></i>
@@ -341,8 +329,6 @@
             </div>
         </div>
     </section>
-    <!-- <div id="dynamic-content" style="display: flex; justify-content: center; align-items: center;" class="hidden"></div> -->
-    <!-- <iframe id="myIframe" src="" width="1000px" height="1000px" frameborder="0"></iframe> -->
 </body>
 
 </html>
