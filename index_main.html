@@ -95,7 +95,7 @@
                             <a href="./gioithieu.html">Giới thiệu</a>
                         </li>
                         <li class="header__nav-item menu-item">
-                            <a>Loại đèn trang trí</a>
+                            <a>Danh mục đèn trang trí</a>
                             <i class="fa-solid fa-angle-down"></i>
                             <ul class="subnav">
                                 <li class="subnav-item">
@@ -837,10 +837,8 @@
                 <div class="row new__product-item-wrapper">
                     <div class="new__product-item col l-3 m-4 c-6" ng-repeat="z in sanphammoinhat">
                         <div class="new__product-img-wrapper">
-                            <a href="">
-                                <!-- <img src="./assets/img/New product/1.jpg" alt="" class="new__product-img"> -->
+                            <a href="./index_product.html?id={{z.maSanPham}}?mlsp={{z.maLoaiSanPham}}">
                                 <img src="{{z.anhDaiDien}}" alt="" class="new__product-img">
-
                             </a>
                         </div>
 
@@ -850,21 +848,18 @@
 
                         <div class="product__title">
                             <div class="product__title-name">
-                                <!-- <a href="">Đèn ốp trần hiệu ứng ánh sáng hình ngôi sao mặt trăng D600mm DR-NC596</a> -->
-                                <a href="" title="{{z.tenSanPham}}">{{z.tenSanPham}}</a>
+                                <a href="./index_product.html?id={{z.maSanPham}}?mlsp={{z.maLoaiSanPham}}" title="{{z.tenSanPham}}">{{z.tenSanPham}}</a>
                             </div>
                             <div class="product__title-price">
                                 <ul class="price-list">
-                                    <!-- <li class="price-item">2.321.000đ</li> -->
                                     <li class="price-item">{{z.giaGiam}}đ</li>
-                                    <!-- <li class="price-item">3.570.000đ</li> -->
                                     <li class="price-item">{{z.gia}}đ</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="item-title-add">
-                            <a href="" class="item-title-link">Mua ngay</a>
+                            <a ng-click="addToCart(z)" href="./giohang.html" class="item-title-link">Mua ngay</a>
                         </div>
                     </div>
                 </div>

@@ -518,7 +518,7 @@ input:focus {
     border-width: 23px 16px 23px 0;
     border-color: transparent #ffbe00 transparent transparent;
     position: absolute;
-    left: -16px;
+    left: -15px;
     top: 0;
 }
 
@@ -530,7 +530,7 @@ input:focus {
     border-width: 23px 0 23px 16px;
     border-color: transparent transparent transparent #ffbe00;
     position: absolute;
-    right: -16px;
+    right: -15px;
     top: 0;
 }
 

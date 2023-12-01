@@ -43,6 +43,41 @@ app.controller("TinTucController", function ($scope, $http) {
         };
         $scope.GetTinTuc();
     });
+
+    $scope.XoaChon = function() {
+        var xacNhanXoa = confirm("Bạn có chắc chắn muốn xóa những tin tức đã chọn?");
+
+        if (xacNhanXoa) {
+            var dataToSend = {
+                list_json_matt: []
+            };
+
+            for (var i = 0; i < $scope.listTT.length; i++) {
+                if ($scope.listTT[i].selected) {
+                    var maTinTuc = $scope.listTT[i].maTinTuc;
+                    var chiTietTT = {
+                        maTinTuc: maTinTuc,
+                        ghiChu: 3
+                    };
+                    dataToSend.list_json_matt.push(chiTietTT);
+                }
+            }
+
+            $http({
+                method: 'POST',
+                data: dataToSend,
+                url: current_url_ad + '/api/TinTuc/deleteS_TinTuc',
+            }).then(function(response) {
+                $scope.listTT = response.data.data;
+                alert("Xóa thành công những tin tức đã chọn");
+                location.reload();
+            }).catch(function(error) {
+                console.error('Lỗi:', error);
+            });
+        } else {
+            
+        }
+    };
 });
 
 

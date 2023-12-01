@@ -95,6 +95,40 @@ app.controller("SanPhamController", function ($scope, $http) {
 
     $scope.GetLoaiSanPham();
 
+    $scope.XoaChon = function() {
+        var xacNhanXoa = confirm("Bạn có chắc chắn muốn xóa những sản phẩm đã chọn?");
+
+        if (xacNhanXoa) {
+            var dataToSend = {
+                list_json_masp: []
+            };
+
+            for (var i = 0; i < $scope.listSP.length; i++) {
+                if ($scope.listSP[i].selected) {
+                    var maSanPham = $scope.listSP[i].maSanPham;
+                    var chiTietSP = {
+                        maSanPham: maSanPham,
+                        ghiChu: 3
+                    };
+                    dataToSend.list_json_masp.push(chiTietSP);
+                }
+            }
+
+            $http({
+                method: 'POST',
+                data: dataToSend,
+                url: current_url_ad + '/api/SanPham/deleteS_SanPham',
+            }).then(function(response) {
+                $scope.listSP = response.data.data;
+                alert("Xóa thành công những sản phẩm đã chọn");
+                location.reload();
+            }).catch(function(error) {
+                console.error('Lỗi:', error);
+            });
+        } else {
+            
+        }
+    };
 });
 
 // var list = JSON.parse(localStorage.getItem('Product')) || [];
@@ -139,6 +173,17 @@ function ThemSanPham() {
     var anhDaiDien = document.getElementById("AnhDaiDien");
     var image = document.getElementById('viewimg');
     var newImagePath = "./assets/img/Product/Đèn chùm/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn mâm ốp trần/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn thả/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn tường/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn chuyên dụng/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn soi tranh - gương/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn led/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn ngoại thất/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn năng lượng mặt trời/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Bóng đèn và phụ kiện/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn trừng bày thanh lý/" + anhDaiDien.value.split("\\").pop();
+
     image.src = newImagePath;
 
     var sanPham = {
@@ -256,6 +301,16 @@ function CapNhat() {
     var anhDaiDien = document.getElementById("AnhDaiDien");
     var image = document.getElementById('viewimg');
     var newImagePath = "./assets/img/Product/Đèn chùm/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn mâm ốp trần/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn thả/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn tường/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn chuyên dụng/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn soi tranh - gương/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn led/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn ngoại thất/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn năng lượng mặt trời/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Bóng đèn và phụ kiện/" + anhDaiDien.value.split("\\").pop();
+    // var newImagePath = "./assets/img/Product/Đèn trừng bày thanh lý/" + anhDaiDien.value.split("\\").pop();
     image.src = newImagePath;
 
     var sanphamData = {

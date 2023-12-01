@@ -43,6 +43,41 @@ app.controller("KhachController", function ($scope, $http) {
         };
         $scope.GetKhachHang();
     });
+
+    $scope.XoaChon = function() {
+        var xacNhanXoa = confirm("Bạn có chắc chắn muốn xóa những khách hàng đã chọn?");
+
+        if (xacNhanXoa) {
+            var dataToSend = {
+                list_json_makhachhang: []
+            };
+
+            for (var i = 0; i < $scope.listKH.length; i++) {
+                if ($scope.listKH[i].selected) {
+                    var maKH = $scope.listKH[i].maKH;
+                    var chiTietKH = {
+                        maKH: maKH,
+                        ghiChu: 3
+                    };
+                    dataToSend.list_json_makhachhang.push(chiTietKH);
+                }
+            }
+
+            $http({
+                method: 'POST',
+                data: dataToSend,
+                url: current_url_ad + '/api/Khach/deleteS_Khachhang',
+            }).then(function(response) {
+                $scope.listKH = response.data.data;
+                alert("Xóa thành công những khách hàng đã chọn");
+                location.reload();
+            }).catch(function(error) {
+                console.error('Lỗi:', error);
+            });
+        } else {
+
+        }
+    };
 });
 
 

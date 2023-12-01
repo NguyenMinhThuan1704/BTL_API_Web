@@ -43,6 +43,41 @@ app.controller("NhaPhanPhoiController", function ($scope, $http) {
         };
         $scope.GetNhaPhanPhoi();
     });
+
+    $scope.XoaChon = function() {
+        var xacNhanXoa = confirm("Bạn có chắc chắn muốn xóa những nhà cung cấp đã chọn?");
+
+        if (xacNhanXoa) {
+            var dataToSend = {
+                list_json_manpp: []
+            };
+
+            for (var i = 0; i < $scope.listNPP.length; i++) {
+                if ($scope.listNPP[i].selected) {
+                    var maNhaPhanPhoi = $scope.listNPP[i].maNhaPhanPhoi;
+                    var chiTietNPP = {
+                        maNhaPhanPhoi: maNhaPhanPhoi,
+                        ghiChu: 3
+                    };
+                    dataToSend.list_json_manpp.push(chiTietNPP);
+                }
+            }
+
+            $http({
+                method: 'POST',
+                data: dataToSend,
+                url: current_url_ad + '/api/NhaPhanPhoi/deleteS_NPP',
+            }).then(function(response) {
+                $scope.listNPP = response.data.data;
+                alert("Xóa thành công những nhà cung cấp đã chọn");
+                location.reload();
+            }).catch(function(error) {
+                console.error('Lỗi:', error);
+            });
+        } else {
+            
+        }
+    };
 });
 
 

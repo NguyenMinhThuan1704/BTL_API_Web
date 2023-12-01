@@ -60,6 +60,40 @@ app.controller("TaiKhoanController", function ($scope, $http) {
     };
     $scope.GetLoaiTaiKhoan();
 
+    $scope.XoaChon = function() {
+        var xacNhanXoa = confirm("Bạn có chắc chắn muốn xóa những tài khoản đã chọn?");
+
+        if (xacNhanXoa) {
+            var dataToSend = {
+                list_json_mataikhoan: []
+            };
+
+            for (var i = 0; i < $scope.listTK.length; i++) {
+                if ($scope.listTK[i].selected) {
+                    var maTaiKhoan = $scope.listTK[i].maTaiKhoan;
+                    var chiTietTK = {
+                        maTaiKhoan: maTaiKhoan,
+                        ghiChu: 3
+                    };
+                    dataToSend.list_json_mataikhoan.push(chiTietTK);
+                }
+            }
+
+            $http({
+                method: 'POST',
+                data: dataToSend,
+                url: current_url_ad + '/api/User/deleteS_TaiKhoan',
+            }).then(function(response) {
+                $scope.listTK = response.data.data;
+                alert("Xóa thành công những tài khoản đã chọn");
+                location.reload();
+            }).catch(function(error) {
+                console.error('Lỗi:', error);
+            });
+        } else {
+            
+        }
+    };
 });
 
 function ThemTaiKhoan() {

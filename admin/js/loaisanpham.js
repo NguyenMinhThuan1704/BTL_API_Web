@@ -43,6 +43,41 @@ app.controller("LoaiSanPhamController", function ($scope, $http) {
         };
         $scope.GetLoaiSanPham();
     });
+
+    $scope.XoaChon = function() {
+        var xacNhanXoa = confirm("Bạn có chắc chắn muốn xóa những loại sản phẩm đã chọn?");
+
+        if (xacNhanXoa) {
+            var dataToSend = {
+                list_json_maloaisp: []
+            };
+
+            for (var i = 0; i < $scope.listLSP.length; i++) {
+                if ($scope.listLSP[i].selected) {
+                    var maLoaiSanPham = $scope.listLSP[i].maLoaiSanPham;
+                    var chiTietLSP = {
+                        maLoaiSanPham: maLoaiSanPham,
+                        ghiChu: 3
+                    };
+                    dataToSend.list_json_maloaisp.push(chiTietLSP);
+                }
+            }
+
+            $http({
+                method: 'POST',
+                data: dataToSend,
+                url: current_url_ad + '/api/LoaiSanPham/deleteS_LoaiSanPham',
+            }).then(function(response) {
+                $scope.listLSP = response.data.data;
+                alert("Xóa thành công những loại sản phẩm đã chọn");
+                location.reload();
+            }).catch(function(error) {
+                console.error('Lỗi:', error);
+            });
+        } else {
+            
+        }
+    };
 });
 
 var list = JSON.parse(localStorage.getItem('TypeProduct')) || [];
